@@ -52,7 +52,7 @@ bash run_gcp.sh --project YOUR_PROJECT_ID --workers 100
 
 The cloud launcher asks which VM to use. **On any computation or pipeline error it keeps the VM running.** In direct mode, successful computation and a checksum-verified local download are both required before stopping; reconnect with `bash run_gcp.sh --resume RUN_ID` if the client was offline. [Execution and resume guide](docs/one-command-ja.md).
 
-The original production computation took approximately 27.5 hours on its VM; the subsequent two-worker repair took approximately 28 minutes. These are recorded runs, not a guarantee for other hardware. [Reproduction details](docs/reproduction.md).
+The original production computation took approximately 27.5 hours on a Google Cloud Platform VM equipped with n2d-highcpu-128.
 
 ## Files and provenance
 
@@ -68,7 +68,7 @@ The original production computation took approximately 27.5 hours on its VM; the
 | `tools/` | Local/cloud execution, export, GitHub release preparation |
 | `tests/` | Numerical identities, independent optimization comparisons, workflow guards |
 
-Large raw checkpoints and per-repetition records belong in the versioned **GitHub Release asset**, not Git history. The publication tool builds that asset from the verified received archive and omits operational cloud logs and launch details. [Publish the repository and raw-data release](docs/publishing.md).
+Large raw checkpoints and per-repetition records belong in the versioned **GitHub Release asset**, not Git history. The publication tool builds that asset from the verified received archive and omits operational cloud logs and launch details.
 
 ```bash
 python -m unittest discover -s tests -v
