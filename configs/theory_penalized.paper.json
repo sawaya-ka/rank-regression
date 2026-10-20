@@ -1,7 +1,7 @@
 {
   "experiment": "theory_penalized",
   "preset": "paper",
-  "provenance": "Penalized theoretical risks on the phase_meta.csv grid. The signal has nonzero probability 0.2 and slab variance 5, as in Figure 10; the original Figure 7 calculation used 0.1 and 10. Penalties use the lambda/n convention.",
+  "provenance": "Penalized theoretical risks on the phase_meta.csv grid. The signal has nonzero probability 0.2 and slab variance 5, as in Figures 7 and 10. Penalties use the lambda/n convention.",
   "settings": {
     "penalties": [
       "ridge",

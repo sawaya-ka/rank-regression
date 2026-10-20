@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "provenance": "recovered historical results; risks unchanged; parameter labels normalized",
+  "provenance": "Numerical results for Figure 8; source records and calculation settings are recorded below.",
   "complete": true,
   "noise": "standard_student_t",
   "grid": {
@@ -146,7 +146,7 @@
   ],
   "risk_values_changed": false,
   "grid_values_changed": false,
-  "solver_diagnostics": "Historical success flags are retained; they are not exact optimality certificates.",
+  "solver_diagnostics": "Solver success flags record numerical acceptance, not exact optimality certificates.",
   "prior_cache_verification": {
     "directory": "rank_penalty_results_t/cache_t_std_0_spikeslab_eps0.2_gammabnz25",
     "files": 3600,
@@ -154,7 +154,7 @@
     "relative_tolerance": 1e-12,
     "absolute_tolerance": 1e-15,
     "sorted_filename_sha256_manifest_digest": "b26df3a449041ed65783ad90297143571baa63bd0297af09c39df29d9f719c51",
-    "note": "Historical aggregation introduces floating-point CSV round-trip differences; risks and parameter values match to the stated tolerance."
+    "note": "CSV round trips introduce floating-point differences; risks and parameter values match to the stated tolerance."
   },
   "figure": "8",
   "experiment": "theory_penalized_are",
@@ -789,7 +789,7 @@
     "GH_N": 40,
     "GRID_SIZE": 1401
   },
-  "original_settings_source": "recovered ARE_pnl_t.py defaults; runtime settings file absent; df/delta grids verified against CSV",
+  "original_settings_source": "ARE_pnl_t.py defaults; runtime settings file absent; df/delta grids verified against CSV",
   "signal": {
     "kind": "spike_slab",
     "nonzero_probability": 0.2,
@@ -806,9 +806,6 @@
     "target": "finite 500-point grid",
     "display_statistic": "limiting_risk"
   },
-  "rerun_reasons": [
-    "The LS ridge optimum at df=3, delta=0.1 reaches the historical upper search bound."
-  ],
   "boundary_counts": {
     "ls": 1,
     "rank": 0

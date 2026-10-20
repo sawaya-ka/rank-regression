@@ -4,7 +4,7 @@ The scale is one (not variance-standardized). Quadrature represents the t
 law as a Gaussian scale mixture. The order controls numerical integration,
 not Monte Carlo precision. Near delta=1 and small degrees of freedom,
 quadrature convergence can be slow; increase the order and compare results.
-The archived 100-node phase grid is historical output, not certified accuracy.
+The 100-node phase grid has no uniform quadrature error bound.
 """
 
 import numpy as np

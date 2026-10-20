@@ -210,53 +210,12 @@
     ]
   },
   "complete": true,
-  "provenance": "Composite recovery: original successful checkpoint bytes were preserved; 19 failed coordinates were repaired with separate provenance.",
+  "provenance": "Student-t risk grid with quadrature settings recorded below.",
   "config_fingerprint": "80e2d1b5014ebb2019f5dd5851c53f9543b1639a00d7a4a410e26ce8edad9375",
   "recomputation": {
     "kind": "quadrature",
     "updated_rows": 865,
     "failed_rows": 0,
-    "plan": {
-      "schema_version": 1,
-      "mode": "paper",
-      "description": "Corrected rerun after complete recovery; archival values are reused where scientifically equivalent.",
-      "data_root": "data/recovered",
-      "unpenalized_theory_source": "data/unpenalized_student_t.csv",
-      "quadrature": {
-        "orders": [
-          300,
-          600,
-          1200
-        ],
-        "relative_tolerance": 0.0005,
-        "near_tie_relative_gap": 0.01,
-        "low_df_max": 3,
-        "small_delta_max": 1.1
-      },
-      "theory_lasso": {
-        "beta_zero_prob": 0.8,
-        "beta_slab_var": 5.0,
-        "lambda_min": 0.01,
-        "lambda_max": 300.0,
-        "n_lambda": 200,
-        "gh_n": 60,
-        "grid_size": 1001,
-        "estimators": [
-          "ls",
-          "lad",
-          "rank"
-        ]
-      },
-      "empirical": {
-        "include_all_penalized_rank": true,
-        "rank_backend": "admm",
-        "rank_admm_maxiter": 50000,
-        "rank_admm_atol": 1e-06,
-        "rank_admm_rtol": 1e-05
-      },
-      "figures": true
-    },
-    "plan_role": "Original plan; the documented recovery overrides also apply.",
     "numerical_recovery": {
       "manifest": "provenance/repair_manifest.json (relative to repository root)",
       "overrides": {
@@ -276,13 +235,15 @@
           "rtol": 1e-05
         }
       }
-    }
+    },
+    "plan_reference": "provenance/resolved_plan.json",
+    "plan_key": "original_plan"
   },
   "parent_provenance": {},
   "current_csv_sha256": "5ac319a295ed320bc68728d9e1f5783450a4bb46e706541910781c84e6becb02",
   "risk_values_changed": true,
   "remaining_limitations": [
-    "Only 865 selected sensitive or nearly tied cells passed a successive-order check; the other 9135 cells retain archived 100-node values.",
+    "865 selected sensitive or nearly tied cells passed a successive-order check; the other 9135 cells use 100-node quadrature.",
     "Successive-order comparisons do not give rigorous error bounds."
   ],
   "quadrature_nodes_archived": 100,

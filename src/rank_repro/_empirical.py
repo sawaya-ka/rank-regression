@@ -1,4 +1,4 @@
-"""Penalized finite-sample experiment kernels, derived from the supplied Rank2 code.
+"""Penalized finite-sample experiment kernels.
 All exported lambda values multiply the penalty sum by 1/n.
 """
 

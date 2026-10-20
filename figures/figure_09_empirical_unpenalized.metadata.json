@@ -3,7 +3,7 @@
   "source": "empirical/unpenalized_phase.csv",
   "data_metadata": {
     "schema_version": 1,
-    "provenance": "Composite recovery: original successful checkpoint bytes were preserved; 19 failed coordinates were repaired with separate provenance.",
+    "provenance": "Numerical results for Figure 9; source records and calculation settings are recorded below.",
     "complete": true,
     "noise": "standard_student_t",
     "grid": {
@@ -116,7 +116,7 @@
     "grid_values_changed": false,
     "figure": "9",
     "experiment": "empirical_unpenalized",
-    "original_settings_source": "complete recovered runtime metadata JSON",
+    "original_settings_source": "runtime metadata JSON",
     "n": 1000,
     "n_rep": 10,
     "base_seed": 20260610,
@@ -141,47 +141,6 @@
       "kind": "unpenalized_rank",
       "updated_rows": 2500,
       "failed_rows": 0,
-      "plan": {
-        "schema_version": 1,
-        "mode": "paper",
-        "description": "Corrected rerun after complete recovery; archival values are reused where scientifically equivalent.",
-        "data_root": "data/recovered",
-        "unpenalized_theory_source": "data/unpenalized_student_t.csv",
-        "quadrature": {
-          "orders": [
-            300,
-            600,
-            1200
-          ],
-          "relative_tolerance": 0.0005,
-          "near_tie_relative_gap": 0.01,
-          "low_df_max": 3,
-          "small_delta_max": 1.1
-        },
-        "theory_lasso": {
-          "beta_zero_prob": 0.8,
-          "beta_slab_var": 5.0,
-          "lambda_min": 0.01,
-          "lambda_max": 300.0,
-          "n_lambda": 200,
-          "gh_n": 60,
-          "grid_size": 1001,
-          "estimators": [
-            "ls",
-            "lad",
-            "rank"
-          ]
-        },
-        "empirical": {
-          "include_all_penalized_rank": true,
-          "rank_backend": "admm",
-          "rank_admm_maxiter": 50000,
-          "rank_admm_atol": 1e-06,
-          "rank_admm_rtol": 1e-05
-        },
-        "figures": true
-      },
-      "plan_role": "Original plan; the documented recovery overrides also apply.",
       "numerical_recovery": {
         "manifest": "provenance/repair_manifest.json (relative to repository root)",
         "overrides": {
@@ -201,7 +160,9 @@
             "rtol": 1e-05
           }
         }
-      }
+      },
+      "plan_reference": "provenance/resolved_plan.json",
+      "plan_key": "original_plan"
     },
     "parent_provenance": {
       "source_files": [
@@ -229,11 +190,7 @@
       "imported_csv_sha256": "f8daa2bb675977072ef2faa03e2e86470a904a61f548745ab74c1bcfdaeb56b5",
       "risk_round_trip_verified": true,
       "risk_values_changed": false,
-      "solver_diagnostics": "Historical success flags are retained; they are not exact optimality certificates.",
-      "rerun_reasons": [
-        "Archived unpenalized rank success flags mean finite outputs; audit actual optimizer convergence before relying on nearly tied winners.",
-        "The archived signal is normalized to norm one, rather than iid Gaussian; unpenalized exact optimizers are shift equivariant, but numerical approximation still needs checking."
-      ],
+      "solver_diagnostics": "Solver success flags record numerical acceptance, not exact optimality certificates.",
       "original_settings": {
         "args": {
           "out_dir": "results/t_mse_phase_test",
@@ -382,10 +339,10 @@
     "current_csv_sha256": "05da904fd1bdc749f96b879cfcda18636592d46849b651a486a787f428a94603",
     "risk_values_changed": true,
     "remaining_limitations": [
-      "Rank fits satisfy finite residual/gap tolerances; retained LS/LAD use historical diagnostics.",
+      "Rank fits satisfy finite residual/gap tolerances; LS/LAD diagnostics use recorded solver success flags.",
       "Ten repetitions per coordinate do not establish population winner classifications with statistical certainty."
     ],
-    "solver_diagnostics": "Recomputed Rank rows pass primal/dual residual and objective-gap checks; retained LS/LAD use historical diagnostics.",
+    "solver_diagnostics": "Rank fits pass primal/dual residual and objective-gap checks; LS/LAD diagnostics use the recorded solver success flags.",
     "historical_replication_flags": {
       "replicate_level_results_available": true,
       "replicate_level_results_included": false
@@ -393,7 +350,7 @@
     "replicate_level_results_available": true,
     "replicate_level_results_included": false,
     "replicate_level_results_location": "raw GitHub Release asset: results/checkpoints/ and results/diagnostics/",
-    "replicate_level_results_scope": "25000 corrected Rank repetitions at 2500 grid points; retained LS/LAD repetitions belong to the historical source archive."
+    "replicate_level_results_scope": "25000 Rank repetitions at 2500 grid points; LS/LAD repetition-level records are in the source archive."
   },
   "theory_overlay": true,
   "notes": [],

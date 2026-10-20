@@ -55,7 +55,7 @@ python3 tools/run_recompute_plan.py --output-dir results --dry-run
 python3 tools/run_recompute_plan.py --workers 8 --output-dir results
 ```
 
-The configured plan combines new calculations with saved inputs; its scope and the standalone experiment configurations are described in [the reproduction guide](docs/reproduction.md). Successful checkpoints are reused when the source and configuration match.
+The calculation scope and required input tables are described in [the reproduction guide](docs/reproduction.md). Successful checkpoints are reused when the source and configuration match.
 
 An optional launcher runs the plan on an existing Google Cloud VM:
 

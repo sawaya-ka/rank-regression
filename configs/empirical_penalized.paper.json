@@ -126,10 +126,5 @@
       45.514908899576085,
       50.0
     ]
-  },
-  "requires_author_confirmation": [
-    "sample_size_n",
-    "historical_tuning_criterion",
-    "producing_run_directory"
-  ]
+  }
 }

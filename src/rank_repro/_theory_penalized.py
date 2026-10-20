@@ -1,6 +1,4 @@
-"""Penalized scalar-risk kernels extracted from the supplied Rank2 code.
-Only the production fixed-lambda solvers and bounded search are retained.
-"""
+"""Penalized scalar-risk equations, fixed-penalty solvers, and bounded searches."""
 
 from __future__ import annotations
 from typing import Optional, Any

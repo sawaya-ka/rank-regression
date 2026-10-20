@@ -1,8 +1,7 @@
 """Figures 1–6 and S1–S2: theoretical risks, scores, and isotonic geometry.
 
-Figure 1 uses the supplied Student-t phase grid. The paper data combine
-the original 100-node grid with selected higher-order quadrature results;
-see ``docs/reproduction.md`` for numerical accuracy near delta=1 and small nu.
+Figure 1 uses the supplied Student-t phase grid. Quadrature orders and
+accuracy near delta=1 and small nu are described in ``docs/reproduction.md``.
 Other Student-t curves are computed with 300 nodes.
 No artificial data point at delta=1 is inserted.
 """
@@ -326,7 +325,7 @@ def generate_light_figures(data_dir: Path, output_dir: Path) -> list[Path]:
         if metadata.get("complete") is False:
             raise ValueError("The Student-t phase grid has unresolved numerical checks; inspect its metadata before plotting.")
         if not metadata.get("recomputation"):
-            warnings.warn("The original 100-node Student-t grid is quadrature-sensitive at low df near delta=1. See docs/reproduction.md.",UserWarning,stacklevel=2)
+            warnings.warn("The 100-node Student-t grid is quadrature-sensitive at low df near delta=1. See docs/reproduction.md.",UserWarning,stacklevel=2)
         fig,_ = make_figure(data_dir/"unpenalized_student_t.csv")
         paths += _save(fig,output_dir,"fig01_student_efficiency")
         paths += _save(_gaussian_efficiency(),output_dir,"fig02_gaussian_efficiency")

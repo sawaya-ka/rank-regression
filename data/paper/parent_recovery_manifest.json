@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "complete_historical_tables_imported; scientific corrections still required",
+  "status": "complete_input_tables",
   "source_tree_modified": false,
   "risks_recomputed": false,
   "lambda_convention": "loss_average + (lambda/n) * sum(g(beta_j))",

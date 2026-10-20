@@ -232,8 +232,7 @@ def gcs_download(cloud, state, destination):
     exit_code = int(marker["compute_exit_code"])
     previous_error = bool(marker.get("pipeline_error") or marker.get("stop_error"))
     may_stop = exit_code == 0 and not previous_error
-    # Old failed-run markers incorrectly requested a stop. The exit status is
-    # authoritative; never propagate that obsolete flag into a new receipt.
+    # Stop eligibility depends on successful computation and pipeline status.
     receipt = {**marker, "verified": True, "stop_requested_after_download": False}
     if not may_stop:
         receipt["stop_requested_after_backup"] = False

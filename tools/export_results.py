@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Export the small result files needed to recover manuscript Figures 7–10.
+"""Export the result tables and settings for manuscript Figures 7–10.
 
-Run on the original CPU VM, using only the Python standard library::
+Run in an environment containing the experiment outputs, using only the Python standard library::
 
     python export_results.py --source-root /path/to/Rank2 --output recovered-results.tar.gz
 
-Missing/incomplete inputs produce an archive with an honest manifest and a
+Missing/incomplete inputs are recorded in the archive manifest and produce a
 nonzero exit status. ``--allow-partial`` changes the exit status only; it never
 changes an incomplete file's classification. Caches, environments, raw samples,
 and per-lambda full curves are deliberately excluded.

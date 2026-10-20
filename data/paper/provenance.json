@@ -7,7 +7,7 @@
     },
     {
       "file": "empirical/penalized_phase.metadata.json",
-      "sha256": "b575e1ac31d0d68a0c80058ed119aa10a43b66f728d6d748ca85e69851598208"
+      "sha256": "67bc7912fa012690b492d404c91ab8c6b22285088762d7044be872341b3d910c"
     },
     {
       "file": "empirical/unpenalized_phase.csv",
@@ -15,7 +15,7 @@
     },
     {
       "file": "empirical/unpenalized_phase.metadata.json",
-      "sha256": "47d76029ec95b3083bb992ade70763cf1ad819a7f849b24042cf83b164600708"
+      "sha256": "0a282d81573f872c219c7f7e5a079f411dccae9e543700a2098785e8898df889"
     },
     {
       "file": "forced_nonzero_points.json",
@@ -31,7 +31,7 @@
     },
     {
       "file": "parent_recovery_manifest.json",
-      "sha256": "973adabe85ee57135dd489b79bc16ebdf82d7f98a9584ed6e788c90f5c944a83"
+      "sha256": "c5c4192b3fd7bbee1311b59cc7c493b8cc326737cfa25216eddf45d893bb0607"
     },
     {
       "file": "recomputation_manifest.json",
@@ -43,7 +43,7 @@
     },
     {
       "file": "theory/penalized_are.metadata.json",
-      "sha256": "21534641e8200bf1e3381dc823c3f444b01b0c23385c0b63f075ee7b70661299"
+      "sha256": "be55300d79b653a4e4f5e6e6d3a594700cea47fdce25405e8494fd73c44bab31"
     },
     {
       "file": "theory/penalized_phase.csv",
@@ -51,7 +51,7 @@
     },
     {
       "file": "theory/penalized_phase.metadata.json",
-      "sha256": "abcffff07f67522734c0d44d68f91196ff6ac13bce29bef1924a43225f0d0b5b"
+      "sha256": "e2a338566aa39252a7ac78413e862f3521373e833410a463b1828a6742dfce01"
     },
     {
       "file": "unpenalized_student_t.csv",
@@ -59,7 +59,7 @@
     },
     {
       "file": "unpenalized_student_t.metadata.json",
-      "sha256": "27bbfcdfd19c862f1a493a9a50fa35108d0b755015c1956c3c306f201135bad8"
+      "sha256": "0201db868e68373c2be9687239f8e1dc857f625014671f38d99abeecd8c2f3ba"
     }
   ]
 }

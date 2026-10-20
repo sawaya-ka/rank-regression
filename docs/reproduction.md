@@ -20,7 +20,7 @@ python3 tools/run_recompute_plan.py --output-dir results --dry-run
 python3 tools/run_recompute_plan.py --workers 8 --output-dir results
 ```
 
-The plan in `configs/recompute-plan.json` computes 865 selected Student-t quadrature points, 10,000 lasso theory points, 2,500 unpenalized Rank points, and 5,000 penalized empirical points. It combines them with saved inputs in `data/` and `data/recovered/`. In particular, it reuses ridge theory, the Figure 8 optimum table, and selected LS/LAD empirical results. It is not a fresh computation of every entry in the paper tables.
+The plan in `configs/recompute-plan.json` computes 865 selected Student-t quadrature points, 10,000 lasso theory points, 2,500 unpenalized Rank points, and 5,000 penalized empirical points. Ridge theory, the Figure 8 optimum table, and selected LS/LAD empirical summaries are supplied as inputs in `data/` and `data/recovered/`.
 
 The output directory contains checkpoints, assembled tables, diagnostics, and figures. Running the same command again reuses successful checkpoints and retries failed ones. A source/configuration fingerprint prevents reuse after incompatible changes; use a new output directory when changing the implementation, settings, or input data.
 
@@ -31,7 +31,7 @@ rank-repro compute unpenalized_theory --config configs/unpenalized_theory.smoke.
 rank-repro compute unpenalized_theory --config configs/unpenalized_theory.smoke.json --output-dir build/theory-smoke
 ```
 
-Corresponding configurations are available for `theory_penalized`, `theory_penalized_are`, `empirical_unpenalized`, and `empirical_penalized`. The `*.paper.json` files specify standalone experiments; they are distinct from the plan that reuses saved inputs.
+Corresponding configurations are available for `theory_penalized`, `theory_penalized_are`, `empirical_unpenalized`, and `empirical_penalized`. The `*.paper.json` files specify standalone experiments with explicit designs and grids.
 
 A small end-to-end check of the plan is:
 
@@ -47,13 +47,13 @@ python3 tools/run_recompute_plan.py --plan configs/recompute-smoke.json --worker
 
 **Penalty selection.** The theoretical calculations use finite penalty searches. Figure 7 starts from 200 candidates and refines eligible minima. Figure 8 uses the supplied optimum table; one LS ridge optimum at Student-t df = 3 and δ = 0.1 reaches the search upper boundary. These minima do not certify unrestricted infima. Very close risks in a phase diagram should not be interpreted as resolved strict superiority.
 
-**Monte Carlo summaries.** Figure 9 uses n = 1,000 and ten repetitions per point. Figure 10 uses n = 500 and 50 repetitions per point, selecting penalties by median MSE and displaying mean MSE at the selected penalty on the same repetitions. The latter measures oracle tuning rather than cross-validation performance. The archived raw data contain selected repetitions and candidate summaries, not every fitted coefficient vector or every historical repetition. Per-table metadata specify their availability.
+**Monte Carlo summaries.** Figure 9 uses n = 1,000 and ten repetitions per point. Figure 10 uses n = 500 and 50 repetitions per point, selecting penalties by median MSE and displaying mean MSE at the selected penalty on the same repetitions. The latter measures oracle tuning rather than cross-validation performance. The raw data contain selected repetitions and candidate summaries; they do not contain every fitted coefficient vector. Per-table metadata specify the available repetition-level records.
 
 **Signal and normalization.** Penalized simulations use iid spike-and-slab coefficients with zero probability 0.8 and nonzero variance 5, including possible all-zero vectors. The unpenalized simulations use design variance one and a coefficient vector uniform on the unit sphere. In paper coordinates, `X_paper = X_code / sqrt(p)` and `beta_paper = sqrt(p) * beta_code`, so the code's squared coefficient error equals the paper's normalized squared coefficient error. Unpenalized coefficient-error distributions are invariant under shifts of the true coefficient vector.
 
 ## Data provenance and verification
 
-The figure tables are in `data/paper/`; their metadata describe the grid, noise and signal laws, penalty normalization, solver settings, and raw-record availability. Source snapshots and checkpoint hashes are in `provenance/`. The working implementation can evolve independently of the archived generating source, so a new run is expected to have a new fingerprint.
+The figure tables are in `data/paper/`; their metadata describe the grid, noise and signal laws, penalty normalization, solver settings, and raw-record availability. Source snapshots and checkpoint hashes are in `provenance/`. The generating source and configuration are identified by their fingerprints.
 
 Download the [v0.3.0 raw result archive](https://github.com/sawaya-ka/rank-regression/releases/download/v0.3.0/rank-results-v0.3.0.tar.gz), verify its SHA-256 against `67ffa4c7bdf1468885cdd8ebfb18f077bf67f3b6860fb8a757c1fc95946f1f82`, and extract it into `build/raw-results/`. Then run:
 

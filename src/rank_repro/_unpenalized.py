@@ -1,4 +1,4 @@
-"""Unpenalized finite-sample experiment kernels, derived from the supplied Rank2 code.
+"""Unpenalized finite-sample experiment kernels.
 Production orchestration and checkpoints are in experiments.py.
 """
 

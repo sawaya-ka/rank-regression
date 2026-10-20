@@ -22,10 +22,9 @@ from matplotlib.ticker import StrMethodFormatter
 
 
 METHODS = ("LS", "LAD", "rank")
-# Keep estimator colors consistent across theory and empirical phase maps.
-# LS and Rank also differ in lightness; LAD uses purple rather than blue.
-COLORS = ("#D98264", "#8064B5", "#247A65")
-PHASE_ALPHA = .82
+# Shared pastel colors for the theory and empirical phase maps.
+COLORS = ("#FA9C9E", "#A0A0F3", "#95C89C")
+PHASE_ALPHA = 1.0
 FILES = {
     "7": ("theory/penalized_phase.csv", "figure_07_penalized_phase.pdf"),
     "8": ("theory/penalized_are.csv", "figure_08_penalized_are.pdf"),
@@ -45,8 +44,8 @@ def _metadata_path(path: Path) -> Path:
 def _load(path: Path, *, penalized: bool) -> tuple[pd.DataFrame, dict]:
     if not path.is_file():
         raise FigureDataError(
-            f"Required result table is missing: {path}. Recover the complete "
-            "original table and metadata, or run the corresponding experiment; "
+            f"Required result table is missing: {path}. Provide the complete "
+            "table and metadata, or run the corresponding experiment; "
             "the archived PDF cannot substitute for these data."
         )
     meta_path = _metadata_path(path)
@@ -183,6 +182,8 @@ def _phase(ax, frame: pd.DataFrame, columns: list[str], title: str) -> None:
     ax.yaxis.label.set_size(24)
     ax.title.set_size(22)
     ax.tick_params(axis="both", which="both", labelsize=18)
+    ax.set_axisbelow(False)
+    ax.grid(True, which="both", color="white", alpha=.12, linewidth=.6)
 
 
 def _phase_legend(fig, *, empirical: bool) -> None:
@@ -242,12 +243,12 @@ def _figure8(frame: pd.DataFrame, meta: dict):
     settings = meta.get("config", {}).get("settings", {})
     recorded_search = all(key in settings for key in ("lambda_min", "lambda_max", "n_lambda"))
     if "optimization" not in meta and "lambda_search" not in meta and not recorded_search:
-        notes.append("Runtime lambda-search settings are not recorded; recovered script defaults are described in metadata. Finite-grid minima are not certified global infima.")
+        notes.append("Runtime lambda-search settings are not recorded; script defaults are described in metadata. Finite-grid minima are not certified global infima.")
     for note in notes:
         warnings.warn(note, UserWarning, stacklevel=2)
     dfs = np.sort(frame["df"].unique())
     normalize = Normalize(dfs[0], dfs[-1])
-    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex="col", layout="constrained")
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex="col", sharey="row", layout="constrained")
     for j, penalty in enumerate(("ridge", "lasso")):
         for df in dfs:
             part = frame[(frame["df"] == df) & (frame["penalty"] == penalty)].sort_values("delta")
@@ -259,7 +260,7 @@ def _figure8(frame: pd.DataFrame, meta: dict):
             axes[1, j].plot(x, part["lambda_ls_opt"], color=plt.colormaps["Reds"](shade), ls="--", lw=1.3)
         axes[0, j].axhline(1, color=".4", ls=":", lw=1)
         axes[0, j].set(title=penalty.title() + " penalty",
-                       ylabel="optimized LS risk /\noptimized Rank risk")
+                       ylabel=r"$\frac{\min_{\lambda}\alpha_{\rm LS}^{2}(\lambda)}{\min_{\lambda}\alpha_{\rm Rank}^{2}(\lambda)}$")
         axes[1, j].set(xlabel=r"$\delta$", ylabel=r"selected $\lambda$")
         for ax in axes[:, j]:
             ax.set_xscale("log")
@@ -270,6 +271,8 @@ def _figure8(frame: pd.DataFrame, meta: dict):
             ax.yaxis.label.set_size(20)
             ax.title.set_size(22)
             ax.tick_params(axis="both", which="both", labelsize=16)
+    axes[0, 1].set_ylabel("")
+    axes[1, 1].set_ylabel("")
     handles, labels = axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="outside upper center", ncol=9,
                fontsize=13, frameon=False, handlelength=1.6,

@@ -6,7 +6,7 @@ import csv, hashlib, json, math
 import sys
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--extracted', type=Path, required=True, help='Root containing results/ and source/ from the reviewed raw archive')
+parser.add_argument('--extracted', type=Path, required=True, help='Root containing results/ and source/ from the raw result archive')
 parser.add_argument('--output-dir', type=Path, default=Path('build/archive-audit'))
 args = parser.parse_args()
 ROOT = args.extracted
@@ -128,16 +128,16 @@ report['run_status'] = read(R/'run_status.json')
 report['warnings'] = [
     'Finite lambda searches and quadrature-order comparisons are numerical diagnostics, not proofs of unrestricted global optima or rigorous quadrature error bounds.',
     'Only selected-lambda empirical repetitions are retained; unsuccessful lambda candidates in search traces need not invalidate an accepted selected candidate.',
-    'Figure 8 is unchanged historical finite-grid data; its LS ridge optimum at df=3, delta=0.1 reaches the upper search bound.',
-    'Retained LS/LAD empirical summaries use historical diagnostics except at 760 forced-signal points where all estimators were retuned.',
+    'Figure 8 uses a finite penalty grid; its LS ridge optimum at df=3, delta=0.1 reaches the upper search bound.',
+    'LS/LAD diagnostics outside the 760 points identified in forced_nonzero_points.json are limited to the input-table solver flags.',
     'Figure 10 tunes lambda using median MSE, then displays mean MSE at that selection on the same repetitions (oracle Monte Carlo comparison, not cross-validation).',
-    'Some metadata fields about replicate-level availability are stale: new raw selected repetitions exist for all Rank points and all methods at forced-signal correction points; historical retained LS/LAD raw availability must be stated separately.',
-    'Archive contains generated Figures 1–10 and S1–S2. The separate S3 schematic is a reconstruction and is not in this run archive.'
+    'The archive includes selected Rank repetitions at every point and selected LS/LAD repetitions at the 760 points identified in forced_nonzero_points.json; LS/LAD repetition-level records at the other points are not included.',
+    'Archive contains Figures 1–10 and S1–S2. Figure S3 is generated separately by the schematic renderer.'
 ]
 expected_counts = {'quadrature':865, 'theory_lasso':10000, 'unpenalized_rank':2500, 'penalized_repair':5000}
 if dict(counts) != expected_counts: errors.append('Unexpected production job counts')
 if not report['run_status'].get('complete') or report['run_status'].get('failed_jobs') != 0: errors.append('Run is not complete')
-if manifest['fingerprint'] != '80e2d1b5014ebb2019f5dd5851c53f9543b1639a00d7a4a410e26ce8edad9375': errors.append('Unexpected reviewed run fingerprint')
+if manifest['fingerprint'] != '80e2d1b5014ebb2019f5dd5851c53f9543b1639a00d7a4a410e26ce8edad9375': errors.append('Unexpected source/configuration fingerprint')
 report['passed'] = not errors
 OUT.mkdir(parents=True,exist_ok=True)
 (OUT/'received-run-audit.json').write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')

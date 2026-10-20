@@ -1,7 +1,7 @@
 {
   "experiment": "unpenalized_theory",
   "preset": "paper",
-  "provenance": "Unpenalized theoretical risks on the Figure 1 grid using 300 quadrature nodes. The original grid used 100 nodes. Neither order guarantees uniform accuracy near df=1, delta=1.001; compare increasing quadrature orders before classifying near ties.",
+  "provenance": "Unpenalized theoretical risks on the Figure 1 grid using 300 quadrature nodes. This order does not guarantee uniform accuracy near df=1, delta=1.001; compare increasing quadrature orders before classifying near ties.",
   "settings": {
     "df_values": [
       1.0,

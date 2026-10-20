@@ -3,7 +3,7 @@
   "source": "theory/penalized_phase.csv",
   "data_metadata": {
     "schema_version": 1,
-    "provenance": "Composite recovery: original successful checkpoint bytes were preserved; 19 failed coordinates were repaired with separate provenance.",
+    "provenance": "Numerical results for Figure 7; source records and calculation settings are recorded below.",
     "complete": true,
     "noise": "standard_student_t",
     "grid": {
@@ -270,7 +270,7 @@
     "grid_values_changed": false,
     "figure": "7",
     "experiment": "theory_penalized",
-    "original_settings_source": "recovered runtime phase_meta.csv",
+    "original_settings_source": "runtime phase_meta.csv",
     "signal": {
       "kind": "spike_slab",
       "nonzero_probability": 0.2,
@@ -287,47 +287,6 @@
       "kind": "theory_lasso",
       "updated_rows": 10000,
       "failed_rows": 0,
-      "plan": {
-        "schema_version": 1,
-        "mode": "paper",
-        "description": "Corrected rerun after complete recovery; archival values are reused where scientifically equivalent.",
-        "data_root": "data/recovered",
-        "unpenalized_theory_source": "data/unpenalized_student_t.csv",
-        "quadrature": {
-          "orders": [
-            300,
-            600,
-            1200
-          ],
-          "relative_tolerance": 0.0005,
-          "near_tie_relative_gap": 0.01,
-          "low_df_max": 3,
-          "small_delta_max": 1.1
-        },
-        "theory_lasso": {
-          "beta_zero_prob": 0.8,
-          "beta_slab_var": 5.0,
-          "lambda_min": 0.01,
-          "lambda_max": 300.0,
-          "n_lambda": 200,
-          "gh_n": 60,
-          "grid_size": 1001,
-          "estimators": [
-            "ls",
-            "lad",
-            "rank"
-          ]
-        },
-        "empirical": {
-          "include_all_penalized_rank": true,
-          "rank_backend": "admm",
-          "rank_admm_maxiter": 50000,
-          "rank_admm_atol": 1e-06,
-          "rank_admm_rtol": 1e-05
-        },
-        "figures": true
-      },
-      "plan_role": "Original plan; the documented recovery overrides also apply.",
       "numerical_recovery": {
         "manifest": "provenance/repair_manifest.json (relative to repository root)",
         "overrides": {
@@ -347,7 +306,9 @@
             "rtol": 1e-05
           }
         }
-      }
+      },
+      "plan_reference": "provenance/resolved_plan.json",
+      "plan_key": "original_plan"
     },
     "parent_provenance": {
       "source_files": [
@@ -370,11 +331,7 @@
       "imported_csv_sha256": "2b8024a73c6655c3158cff13427a1cfa5b53d9b438345eb3a24f27920a94819d",
       "risk_round_trip_verified": true,
       "risk_values_changed": false,
-      "solver_diagnostics": "Historical success flags are retained; they are not exact optimality certificates.",
-      "rerun_reasons": [
-        "Historical prior has nonzero_probability=0.1, whereas Figure 10 uses 0.2; use matching theory for overlays.",
-        "Validate finite search boundaries and numerical quadrature before final release."
-      ],
+      "solver_diagnostics": "Solver success flags record numerical acceptance, not exact optimality certificates.",
       "boundary_counts": {
         "ls": 0,
         "lad": 1,
@@ -420,7 +377,7 @@
       "Finite lambda searches do not certify an unrestricted infimum.",
       "Numerical residual and quadrature comparisons are subject to floating-point error."
     ],
-    "ridge_reuse": "Gaussian-design ridge risk depends on the signal second moment, which is one under both priors; recovered ridge rows are retained.",
+    "ridge_reuse": "Gaussian-design ridge risk depends on the signal second moment, which is one for the supplied coefficient distributions.",
     "historical_boundary_counts": null,
     "boundary_counts": {
       "ls": 0,

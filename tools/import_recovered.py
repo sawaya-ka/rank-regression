@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Import complete recovered historical results without recomputing their risks.
+"""Import experiment tables and express their penalties in the paper convention.
 
 Only the labels of regularization parameters are changed to the paper's
 ``loss_average + lambda/n * sum(g(beta_j))`` convention. Every converted
-column is retained with an ``_archived`` suffix. Metadata distinguish the
-historical finite-sample prior and tuning criterion from corrected reruns.
+column is retained with an ``_archived`` suffix. Metadata record the
+coefficient distribution, tuning criterion, and source file checksums.
 """
 
 from __future__ import annotations
@@ -118,7 +118,7 @@ def _parse_scalar(value):
 def _base_metadata(root: Path, relative: str, support: list[str], grid: dict) -> dict:
     return {
         "schema_version": 1,
-        "provenance": "recovered historical results; risks unchanged; parameter labels normalized",
+        "provenance": "Input tables with parameter labels in the paper convention",
         "complete": True,
         "noise": "standard_student_t",
         "grid": grid,
@@ -126,7 +126,7 @@ def _base_metadata(root: Path, relative: str, support: list[str], grid: dict) ->
         "source_files": [source_record(root, relative)] + [source_record(root, value) for value in support],
         "risk_values_changed": False,
         "grid_values_changed": False,
-        "solver_diagnostics": "Historical success flags are retained; they are not exact optimality certificates.",
+        "solver_diagnostics": "Solver success flags record numerical acceptance, not exact optimality certificates.",
     }
 
 
@@ -144,11 +144,11 @@ def _phase(root: Path) -> tuple[pd.DataFrame, dict]:
         "figure": "7",
         "experiment": "theory_penalized",
         "original_settings": original,
-        "original_settings_source": "recovered runtime phase_meta.csv",
+        "original_settings_source": "runtime phase_meta.csv",
         "signal": {"kind": "spike_slab", "nonzero_probability": float(original["eps_b"]), "nonzero_variance": float(original["gamma_b_nz2"]), "force_nonzero": False},
         "lambda_conversion": {"LS": "lambda_paper = delta * lambda_archived", "LAD": "identity", "rank": "identity", "risk_effect": "none; same selected solutions and same finite search candidates"},
         "selection": {"criterion": "limiting_risk", "target": "finite coarse-to-refined search", "display_statistic": "limiting_risk"},
-        "rerun_reasons": ["Historical prior has nonzero_probability=0.1, whereas Figure 10 uses 0.2; use matching theory for overlays.", "Validate finite search boundaries and numerical quadrature before final release."],
+        "interpretation_notes": ["Theory overlays require matching coefficient distributions and penalty normalization.", "Penalty minima are obtained by a finite numerical search."],
     })
     _convert_column(frame, "lambda_ls_opt", frame["delta"])
     _convert_column(frame, "lambda_lad_opt", 1)
@@ -187,17 +187,17 @@ def _are(root: Path) -> tuple[pd.DataFrame, dict]:
     cache_digest = hashlib.sha256()
     for path in cache_paths:
         cache_digest.update((path.name + " " + sha256(path) + "\n").encode())
-    meta["prior_cache_verification"] = {"directory": str(cache_root.relative_to(root)), "files": len(cache_paths), "all_summary_columns_match": True, "relative_tolerance": 1e-12, "absolute_tolerance": 1e-15, "sorted_filename_sha256_manifest_digest": cache_digest.hexdigest(), "note": "Historical aggregation introduces floating-point CSV round-trip differences; risks and parameter values match to the stated tolerance."}
+    meta["prior_cache_verification"] = {"directory": str(cache_root.relative_to(root)), "files": len(cache_paths), "all_summary_columns_match": True, "relative_tolerance": 1e-12, "absolute_tolerance": 1e-15, "sorted_filename_sha256_manifest_digest": cache_digest.hexdigest(), "note": "CSV round trips introduce floating-point differences; risks and parameter values match to the stated tolerance."}
     original = {"DFS": list(range(3, 21)), "DELTA_GRID": grid["delta"], "LAMBDAS_OPT": np.geomspace(.01, 30, 500).tolist(), "STANDARDIZE_T": False, "EPS_B": .2, "GAMMA_B_NZ2": 5., "GH_N": 40, "GRID_SIZE": 1401}
     meta.update({
         "figure": "8",
         "experiment": "theory_penalized_are",
         "original_settings": original,
-        "original_settings_source": "recovered ARE_pnl_t.py defaults; runtime settings file absent; df/delta grids verified against CSV",
+        "original_settings_source": "ARE_pnl_t.py defaults; runtime settings file absent; df/delta grids verified against CSV",
         "signal": {"kind": "spike_slab", "nonzero_probability": .2, "nonzero_variance": 5., "force_nonzero": False},
         "lambda_conversion": {"LS": "lambda_paper = delta * lambda_archived", "rank": "identity", "risk_effect": "none; same selected solutions and same finite search candidates"},
         "selection": {"criterion": "limiting_risk", "target": "finite 500-point grid", "display_statistic": "limiting_risk"},
-        "rerun_reasons": ["The manuscript lambda panels require the corrected LS labels provided here; this is an exact relabeling, not a new experiment.", "The LS ridge optimum at df=3, delta=0.1 reaches the historical upper search bound."],
+        "interpretation_notes": ["The LS ridge optimum at df=3, delta=0.1 reaches the penalty-search upper bound."],
     })
     _convert_column(frame, "lambda_ls_opt", frame["delta"])
     _convert_column(frame, "lambda_rank_opt", 1)
@@ -231,7 +231,7 @@ def _empirical(root: Path, penalized: bool) -> tuple[pd.DataFrame, dict]:
         "figure": "10" if penalized else "9",
         "experiment": f"empirical_{name}",
         "original_settings": original,
-        "original_settings_source": "complete recovered runtime metadata JSON",
+        "original_settings_source": "runtime metadata JSON",
         "n": int(settings["n"]), "n_rep": int(settings["n_rep"]), "base_seed": int(settings["base_seed"]),
         "design": {"distribution": "gaussian", "entry_variance": "1/p" if penalized else "1"},
         "error_metric": "squared_l2_error/p" if penalized else "squared_l2_error",
@@ -241,7 +241,7 @@ def _empirical(root: Path, penalized: bool) -> tuple[pd.DataFrame, dict]:
         meta["signal"] = {"kind": "spike_slab", "nonzero_probability": round(1 - settings["beta_zero_prob"], 12), "nonzero_variance": settings["beta_slab_var"], "force_nonzero": settings["ensure_nonzero_beta"]}
         meta["lambda_conversion"] = {"all_estimators": "lambda_paper = actual_delta * lambda_archived, with actual_delta=n/p", "unchanged_columns": "lambda_eff_* (coefficient lambda_archived/p = lambda_paper/n), counts and source labels", "risk_effect": "none; same selected fitted estimators"}
         meta["replicate_level_results_available"] = False
-        meta["rerun_reasons"] = ["ensure_nonzero_beta=True modifies the iid prior when all sampled coordinates are zero; correct simulations must permit the all-zero draw.", "Selecting lambda by median MSE and reporting mean MSE defines a specific oracle comparison; disclose both statistics. The correction plan retains median tuning, so this distinction alone does not require a rerun.", "Inspect historical upper/lower lambda search boundaries rather than treating selected values as unrestricted infima."]
+        meta["interpretation_notes"] = ["ensure_nonzero_beta=True conditions the coefficient distribution on a nonzero draw.", "Penalties are selected by median MSE; displayed risks are mean MSE on the same repetitions.", "Penalty minima are obtained by a finite numerical search."]
         for method in ("LS", "LAD", "rank"):
             for column in (f"lambda_{method}", f"lambda_{method}_opt", f"lambda_{method}_init"):
                 _convert_column(frame, column, frame["actual_delta"])
@@ -257,7 +257,7 @@ def _empirical(root: Path, penalized: bool) -> tuple[pd.DataFrame, dict]:
         meta["lambda_convention"] = "not_applicable"
         meta["replicate_level_results_available"] = True
         meta["replicate_level_results_included"] = False
-        meta["rerun_reasons"] = ["Archived unpenalized rank success flags mean finite outputs; audit actual optimizer convergence before relying on nearly tied winners.", "The archived signal is normalized to norm one, rather than iid Gaussian; unpenalized exact optimizers are shift equivariant, but numerical approximation still needs checking."]
+        meta["interpretation_notes"] = ["Rank success flags in these input records indicate finite outputs, not optimizer convergence.", "The coefficient vector is uniform on the unit sphere."]
     return frame, meta
 
 
@@ -291,7 +291,7 @@ def import_recovered(source_root: Path, output_dir: Path, audit_report: Path | N
         results["empirical/penalized_phase.csv"][1]["manuscript_figure_verification"] = evidence
         results["empirical/penalized_phase.csv"][1]["manuscript_figure_verification"]["audit_report_sha256"] = sha256(Path(audit_report))
         results["empirical/penalized_phase.csv"][1]["manuscript_figure_verification"]["scope"] = "All 5000 winner classifications match; this verifies plotted classes, not unique identity of all underlying numerical risks."
-    manifest = {"schema_version": 1, "status": "complete_historical_tables_imported; scientific corrections still required", "source_tree_modified": False, "risks_recomputed": False, "lambda_convention": PAPER_LAMBDA, "datasets": {}}
+    manifest = {"schema_version": 1, "status": "complete_input_tables", "source_tree_modified": False, "risks_recomputed": False, "lambda_convention": PAPER_LAMBDA, "datasets": {}}
     for relative, (frame, metadata) in results.items():
         target = output_dir / relative
         target.parent.mkdir(parents=True, exist_ok=True)

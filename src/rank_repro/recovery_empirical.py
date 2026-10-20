@@ -1,9 +1,9 @@
-"""Repair empirical figures while retaining the recovered random-number streams.
+"""Empirical grid calculations with reproducible random-number streams.
 
-Jobs use the original grid indices, never indices of a selected subset. Unpenalized
-jobs reuse archived LS/LAD summaries. Penalized jobs retune Rank with an exact
-convex objective, and retune LS/LAD only where the forced-nonzero signal changed
-an actual simulated repetition. Optional overrides are reserved for smoke tests.
+Seeds use the full grid indices, including when computing a subset of points.
+Unpenalized jobs use the supplied LS/LAD summaries and compute Rank fits.
+Penalized jobs optimize Rank and compute LS/LAD at the points specified by
+the input manifest. Optional size overrides are reserved for smoke tests.
 """
 from __future__ import annotations
 
@@ -48,9 +48,9 @@ def _filtered_rows(frame: pd.DataFrame, settings: dict) -> list[dict]:
 def get_jobs(data_root: str | Path, settings: dict | None = None) -> list[dict]:
     """Return serializable point jobs; parallelism/checkpoints belong to the caller.
 
-    ``data_root`` is ``data/recovered``. Defaults repair all unpenalized Rank
+    ``data_root`` is ``data/recovered``. Defaults compute all unpenalized Rank
     points and all penalized Rank points. Set ``include_all_penalized_rank=False``
-    to restrict penalized jobs to the exactly identified forced-signal points.
+    to restrict penalized jobs to the points listed in the signal manifest.
     ``n_override`` / ``n_rep_override`` are explicitly tagged smoke computations
     and must never be merged into paper results.
     """
@@ -122,7 +122,7 @@ def get_jobs(data_root: str | Path, settings: dict | None = None) -> list[dict]:
 
 
 def sample_original_unpenalized(n: int, delta: float, df: float, seed: int):
-    """Replay the archived norm-one beta generation exactly (no change of model)."""
+    """Generate Gaussian designs, unit-norm coefficients, and Student-t noise."""
     if n < 3 or delta <= 1 or df <= 0:
         raise ValueError("Require n>=3, delta>1 and df>0")
     p = max(1, min(int(np.floor(n / delta)), n - 1))

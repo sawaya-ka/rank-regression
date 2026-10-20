@@ -204,17 +204,18 @@ def write_outputs(plan, output, jobs, fingerprint_value):
         frame.to_csv(path, index=False)
         meta_path = path.with_suffix(".metadata.json")
         meta = json.loads(meta_path.read_text())
-        # Keep the input metadata as parent provenance for the updated table.
+        # Keep source records and numerical settings for the input tables.
+        for field in ("rerun_reasons", "manuscript_figure_verification"):
+            meta.pop(field, None)
         parent_fields = ("source_files", "imported_csv_sha256", "risk_round_trip_verified",
-                         "risk_values_changed", "solver_diagnostics", "rerun_reasons",
-                         "boundary_counts", "original_settings", "lambda_conversion",
-                         "manuscript_figure_verification")
+                         "risk_values_changed", "solver_diagnostics", "interpretation_notes",
+                         "boundary_counts", "original_settings", "lambda_conversion")
         parent = {key: meta.pop(key) for key in parent_fields if key in meta}
         meta.update(complete=failed[kind] == 0, config_fingerprint=fingerprint_value,
                     recomputation={"kind": kind, "updated_rows": updated[kind], "failed_rows": failed[kind], "plan": plan},
                     parent_provenance=parent, current_csv_sha256=file_sha(path),
                     risk_values_changed=updated[kind] > 0,
-                    provenance="Table combines newly computed rows with saved baseline values; parent provenance and updated row counts are recorded separately.")
+                    provenance="Calculation settings, source records, and numerical diagnostics for this table are recorded below.")
         meta["remaining_limitations"] = [
             "Finite lambda searches do not certify an unrestricted infimum.",
             "Numerical residual and quadrature comparisons are subject to floating-point error.",
@@ -224,13 +225,12 @@ def write_outputs(plan, output, jobs, fingerprint_value):
         if kind in {"theory_lasso", "penalized_repair"}:
             meta["signal"] = {"kind": "spike_slab", "nonzero_probability": .2, "nonzero_variance": 5., "force_nonzero": False}
         if kind == "theory_lasso":
-            meta["ridge_reuse"] = "Gaussian-design ridge risk depends on the signal second moment, which is one under both priors; saved ridge rows are retained."
+            meta["ridge_reuse"] = "Gaussian-design ridge risk depends on the signal second moment, which is one for the supplied coefficient distributions."
         if kind == "penalized_repair":
             meta["selection"] = {"criterion": "mse_median", "evaluation": "same_repetitions", "display_statistic": "mean"}
             meta["rank_solver"] = "Exact rank and penalty proximal operators with primal/dual residual and gap checks."
-            meta["forced_zero_repair"] = "All methods retuned at the 760 affected points; unaffected LS/LAD samples and estimates reused."
         if kind in {"unpenalized_rank", "penalized_repair"}:
-            meta["solver_diagnostics"] = "Recomputed Rank rows pass primal/dual residual and objective-gap checks; retained LS/LAD use historical diagnostics."
+            meta["solver_diagnostics"] = "Rank fits pass primal/dual residual and objective-gap checks; LS/LAD diagnostics use the recorded solver success flags."
         atomic_json(meta_path, meta)
     atomic_json(data_root / "recomputation_manifest.json", {
         "complete": not any(failed.values()), "config_fingerprint": fingerprint_value,
