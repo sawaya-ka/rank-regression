@@ -26,25 +26,6 @@ On Windows, activate with `.venv\Scripts\activate`. The plotting command reads t
 
 For an interactive entry point, install `python -m pip install -e '.[notebook]'` and open [`notebooks/vis.ipynb`](notebooks/vis.ipynb).
 
-## Corrected experiment status
-
-The received run `rank-8527d9e122b5b8c5-repair-v1` completed **18,365 / 18,365 jobs**. Its 18,346 previously successful checkpoints were retained byte-for-byte; 18 quadrature jobs and one empirical job were repaired without relaxing acceptance tolerances. The empirical repair reran one failed repetition and preserved the other nine.
-
-The release audit checked checkpoint hashes, the provenance of the 19 repairs, all selected Rank fits' stopping diagnostics, and agreement between checkpoints and exported tables. These checks establish computational consistency; they do not turn finite precision calculations or finite penalty searches into exact optima.
-
-| Figure | Input and status |
-|---|---|
-| 1 | Complete 10,000-cell Student-t phase grid; 865 sensitive or nearly tied cells checked and updated |
-| 2–6 | Shared Gaussian and Student-t solvers; Gaussian self-consistency residuals exported |
-| 7 | 20,000-cell penalized theory table; lasso recomputed for the Figure 10 signal law; ridge reused |
-| 8 | Complete 3,600-row historical optimum table; LS penalty labels corrected; finite-search caveats retained |
-| 9 | 2,500-cell empirical grid; all 25,000 Rank repetitions recomputed; historical LS/LAD summaries reused |
-| 10 | 5,000-cell empirical grid; all 250,000 selected Rank repetitions recomputed; LS/LAD retuned at 760 affected cells |
-| S1–S2 | Shared Student-t comparison curves |
-| S3 | Explicit Gaussian illustration; the original manuscript drawing source was unavailable |
-
-Compared with the recovered historical tables, the lowest-risk method changes in 2, 146, 54, and 91 cells of Figures 1, 7, 9, and 10, respectively. These include near ties; they are not tests of statistical significance. The corrected figures replace the historical heatmaps. [Figure map and manuscript changes](docs/figure-map.md) · [Release audit (日本語)](docs/release-audit-ja.md).
-
 ## Numerical conventions
 
 - δ = n/p. Student-t errors have scale one, without variance standardization. The unpenalized LS risk is infinite for degrees of freedom at most two.
