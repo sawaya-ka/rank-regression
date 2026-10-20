@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Execute the reviewed recovery plan locally or inside the detached VM worker."""
+"""Execute the experiment plan locally or inside the detached VM worker."""
 from __future__ import annotations
 
 import argparse
@@ -204,7 +204,7 @@ def write_outputs(plan, output, jobs, fingerprint_value):
         frame.to_csv(path, index=False)
         meta_path = path.with_suffix(".metadata.json")
         meta = json.loads(meta_path.read_text())
-        # Keep the imported record as parent provenance, not a description of corrected values.
+        # Keep the input metadata as parent provenance for the updated table.
         parent_fields = ("source_files", "imported_csv_sha256", "risk_round_trip_verified",
                          "risk_values_changed", "solver_diagnostics", "rerun_reasons",
                          "boundary_counts", "original_settings", "lambda_conversion",
@@ -214,17 +214,17 @@ def write_outputs(plan, output, jobs, fingerprint_value):
                     recomputation={"kind": kind, "updated_rows": updated[kind], "failed_rows": failed[kind], "plan": plan},
                     parent_provenance=parent, current_csv_sha256=file_sha(path),
                     risk_values_changed=updated[kind] > 0,
-                    provenance="Recovered values with documented targeted corrections; archived data remain in the source package.")
+                    provenance="Table combines newly computed rows with saved baseline values; parent provenance and updated row counts are recorded separately.")
         meta["remaining_limitations"] = [
             "Finite lambda searches do not certify an unrestricted infimum.",
             "Numerical residual and quadrature comparisons are subject to floating-point error.",
         ]
         if failed[kind]:
-            meta["remaining_limitations"].append("Failed replacement rows retain historical values; this table is not ready for manuscript figures.")
+            meta["remaining_limitations"].append("Failed jobs retain their baseline values; the table is incomplete and cannot be used for figure generation.")
         if kind in {"theory_lasso", "penalized_repair"}:
             meta["signal"] = {"kind": "spike_slab", "nonzero_probability": .2, "nonzero_variance": 5., "force_nonzero": False}
         if kind == "theory_lasso":
-            meta["ridge_reuse"] = "Gaussian-design ridge risk depends on the signal second moment, which is one under both priors; recovered ridge rows are retained."
+            meta["ridge_reuse"] = "Gaussian-design ridge risk depends on the signal second moment, which is one under both priors; saved ridge rows are retained."
         if kind == "penalized_repair":
             meta["selection"] = {"criterion": "mse_median", "evaluation": "same_repetitions", "display_statistic": "mean"}
             meta["rank_solver"] = "Exact rank and penalty proximal operators with primal/dual residual and gap checks."

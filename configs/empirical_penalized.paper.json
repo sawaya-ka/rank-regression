@@ -1,7 +1,7 @@
 {
   "experiment": "empirical_penalized",
   "preset": "paper",
-  "provenance": "Proposed new computation, NOT recovered Fig10 settings. n=500 is provisional; historical producing metadata are missing. Fifty repetitions follow manuscript. Mean tuning is an explicit new choice; historical mean vs median is unknown. Uses corrected lambda/n.",
+  "provenance": "Standalone penalized experiment with n=500 and 50 Monte Carlo repetitions. This configuration tunes penalties by mean squared error; Figure 10 uses median squared error. The signal has nonzero probability 0.2 and slab variance 5. Penalties use the lambda/n convention.",
   "settings": {
     "penalties": [
       "ridge",

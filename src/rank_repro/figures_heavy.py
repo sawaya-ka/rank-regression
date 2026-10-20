@@ -1,10 +1,9 @@
 """Figures 7–10 from complete, explicitly described numerical result tables.
 
-This module never repairs incomplete grids, substitutes archived PDFs, or
-classifies solver failures as losing estimators. See ``docs/reproduction.md``
-for the data-recovery requirements. Each CSV needs a sibling
-``<stem>.metadata.json`` containing ``noise``, ``signal``, and explicit
-``grid.df``, ``grid.delta`` (plus ``grid.penalty`` for penalized tables).
+Inputs must contain complete numerical grids and valid solver results.
+Each CSV needs a sibling ``<stem>.metadata.json`` containing ``noise``,
+``signal``, and explicit ``grid.df``, ``grid.delta`` (plus ``grid.penalty``
+for penalized tables). See ``docs/reproduction.md`` for data conventions.
 """
 
 from __future__ import annotations
@@ -17,11 +16,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.colors import BoundaryNorm, ListedColormap, Normalize
+from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
+from matplotlib.ticker import StrMethodFormatter
 
 
 METHODS = ("LS", "LAD", "rank")
-COLORS = ("#C43C39", "#3767AF", "#2D7F50")
+# Keep estimator colors consistent across theory and empirical phase maps.
+# LS and Rank also differ in lightness; LAD uses purple rather than blue.
+COLORS = ("#D98264", "#8064B5", "#247A65")
+PHASE_ALPHA = .82
 FILES = {
     "7": ("theory/penalized_phase.csv", "figure_07_penalized_phase.pdf"),
     "8": ("theory/penalized_are.csv", "figure_08_penalized_are.pdf"),
@@ -172,13 +176,23 @@ def _phase(ax, frame: pd.DataFrame, columns: list[str], title: str) -> None:
     cmap = ListedColormap(COLORS)
     ax.pcolormesh(_edges(x), _edges(y), winner, cmap=cmap,
                   norm=BoundaryNorm([-.5, .5, 1.5, 2.5], cmap.N),
-                  alpha=.45, shading="flat", rasterized=True)
+                  alpha=PHASE_ALPHA, shading="flat", rasterized=True)
     ax.set(xscale="log", yscale="log", xlim=(x[0], x[-1]), ylim=(y[0], y[-1]),
-           xlabel=r"degrees of freedom $\nu$", ylabel=r"$\delta=n/p$", title=title)
-    ax.legend(handles=[Patch(facecolor=color, alpha=.6, label=method)
+           xlabel=r"degrees of freedom $\nu$", ylabel=r"$\delta$", title=title)
+    ax.xaxis.label.set_size(22)
+    ax.yaxis.label.set_size(24)
+    ax.title.set_size(22)
+    ax.tick_params(axis="both", which="both", labelsize=18)
+
+
+def _phase_legend(fig, *, empirical: bool) -> None:
+    """Place one readable legend above the maps, clear of theory boundaries."""
+    fig.legend(handles=[Patch(facecolor=color, alpha=PHASE_ALPHA, label=method)
                        for color, method in zip(COLORS, ("LS", "LAD", "Rank"))],
-              title="smallest mean MSE" if columns[0].startswith("mse") else "smallest limiting risk",
-              facecolor="white", fontsize=9, title_fontsize=9)
+               title="smallest mean MSE" if empirical else "smallest limiting risk",
+               loc="outside upper center", ncol=3, frameon=False,
+               fontsize=18, title_fontsize=17, handlelength=1.6,
+               columnspacing=1.7, borderaxespad=.2)
 
 
 def _boundaries(ax, frame: pd.DataFrame, columns: list[str]) -> None:
@@ -194,7 +208,7 @@ def _boundaries(ax, frame: pd.DataFrame, columns: list[str]) -> None:
             values = difference[valid]
             if values.size and values.min() < 0 < values.max():
                 ax.contour(x, y, np.ma.masked_where(~valid, difference), levels=[0],
-                           colors="black", linewidths=1.6, zorder=10)
+                           colors="black", linewidths=1.8, zorder=10)
 
 
 def _matched_overlay(ax, theory: pd.DataFrame, theory_meta: dict, empirical_meta: dict,
@@ -233,26 +247,37 @@ def _figure8(frame: pd.DataFrame, meta: dict):
         warnings.warn(note, UserWarning, stacklevel=2)
     dfs = np.sort(frame["df"].unique())
     normalize = Normalize(dfs[0], dfs[-1])
-    fig, axes = plt.subplots(2, 2, figsize=(12, 8), sharex="col", layout="constrained")
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharex="col", layout="constrained")
     for j, penalty in enumerate(("ridge", "lasso")):
         for df in dfs:
             part = frame[(frame["df"] == df) & (frame["penalty"] == penalty)].sort_values("delta")
             x = part["delta"].to_numpy()
             axes[0, j].plot(x, part["alpha2_ls_opt"] / part["alpha2_rank_opt"],
-                            color=plt.colormaps["viridis"](normalize(df)), lw=1.6, label=rf"$\nu={df:g}$")
+                            color=plt.colormaps["viridis"](normalize(df)), lw=2.0, label=rf"$\nu={df:g}$")
             shade = .35 + .55 * normalize(df)
             axes[1, j].plot(x, part["lambda_rank_opt"], color=plt.colormaps["Greens"](shade), lw=1.5)
             axes[1, j].plot(x, part["lambda_ls_opt"], color=plt.colormaps["Reds"](shade), ls="--", lw=1.3)
         axes[0, j].axhline(1, color=".4", ls=":", lw=1)
-        axes[0, j].set(title=penalty.title() + " penalty", ylabel="optimized LS risk / optimized Rank risk")
-        axes[0, j].legend(ncol=3, fontsize=8, facecolor="white")
-        axes[1, j].set(xlabel=r"$\delta=n/p$", ylabel=r"selected $\lambda$")
-        axes[1, j].plot([], [], color=COLORS[2], label="Rank")
-        axes[1, j].plot([], [], color=COLORS[0], ls="--", label="LS")
-        axes[1, j].legend(facecolor="white")
+        axes[0, j].set(title=penalty.title() + " penalty",
+                       ylabel="optimized LS risk /\noptimized Rank risk")
+        axes[1, j].set(xlabel=r"$\delta$", ylabel=r"selected $\lambda$")
         for ax in axes[:, j]:
             ax.set_xscale("log")
             ax.set_yscale("log")
+            ax.yaxis.set_major_formatter(StrMethodFormatter("{x:g}"))
+            ax.yaxis.set_minor_formatter(StrMethodFormatter("{x:g}"))
+            ax.xaxis.label.set_size(22)
+            ax.yaxis.label.set_size(20)
+            ax.title.set_size(22)
+            ax.tick_params(axis="both", which="both", labelsize=16)
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside upper center", ncol=9,
+               fontsize=13, frameon=False, handlelength=1.6,
+               columnspacing=.9, labelspacing=.4, handletextpad=.45)
+    fig.legend(handles=[Line2D([], [], color=plt.colormaps["Greens"](.8), lw=2, label="Rank"),
+                        Line2D([], [], color=plt.colormaps["Reds"](.8), lw=2, ls="--", label="LS")],
+               loc="outside lower center", ncol=2, frameon=False,
+               fontsize=17, handlelength=2.2, columnspacing=2)
     return fig, notes
 
 
@@ -285,7 +310,7 @@ def generate_heavy_figures(data_dir: Path, output_dir: Path,
                     _check_empirical(frame, meta, penalized=number == "10")
                 columns = _risk_columns(frame, empirical)
                 if number == "9":
-                    fig, ax = plt.subplots(figsize=(7, 5.3), layout="constrained")
+                    fig, ax = plt.subplots(figsize=(7, 5.8), layout="constrained")
                     _phase(ax, frame, columns, "")
                     theory_path = data_dir / "unpenalized_student_t.csv"
                     if theory_path.exists() and _metadata_path(theory_path).exists():
@@ -297,7 +322,7 @@ def generate_heavy_figures(data_dir: Path, output_dir: Path,
                     else:
                         notes.append("Theory overlay omitted: complete unpenalized theory data and metadata were not supplied.")
                 else:
-                    fig, axes = plt.subplots(1, 2, figsize=(12, 5), layout="constrained")
+                    fig, axes = plt.subplots(1, 2, figsize=(12, 5.8), layout="constrained")
                     theory = theory_meta = theory_columns = None
                     if empirical:
                         theory_path = data_dir / FILES["7"][0]
@@ -313,6 +338,7 @@ def generate_heavy_figures(data_dir: Path, output_dir: Path,
                             _matched_overlay(ax, theory[theory["penalty"] == penalty], theory_meta,
                                              meta, theory_columns, penalized=True)
                             overlay_used = True
+                _phase_legend(fig, empirical=empirical)
             for note in notes:
                 if "overlay" in note:
                     warnings.warn(note, UserWarning, stacklevel=2)

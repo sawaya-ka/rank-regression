@@ -393,8 +393,7 @@
     "replicate_level_results_available": true,
     "replicate_level_results_included": false,
     "replicate_level_results_location": "raw GitHub Release asset: results/checkpoints/ and results/diagnostics/",
-    "replicate_level_results_scope": "25000 corrected Rank repetitions at 2500 grid points; retained LS/LAD repetitions belong to the historical source archive.",
-    "publication_metadata_note": "Numerical CSV bytes and archived config fingerprints are unchanged. Original metadata are preserved under provenance/original-metadata/. Publication annotations clarify numerical checks and raw-record availability."
+    "replicate_level_results_scope": "25000 corrected Rank repetitions at 2500 grid points; retained LS/LAD repetitions belong to the historical source archive."
   },
   "theory_overlay": true,
   "notes": [],

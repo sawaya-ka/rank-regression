@@ -179,11 +179,11 @@ def run_light_experiment(config_path: Path, output_dir: Path, workers: int, dry_
     metadata = {**plan,"config":config,"preset":config["preset"],"source_sha256":engine_sha,
                 "noise":"standard_student_t","noise_scale":1.0,
                 "signal":{"kind":"arbitrary_unpenalized","note":"risk is invariant to the coefficient vector"},
-                "aspect_ratio":"n/p","risk":"limiting normalized squared coefficient error",
+                "aspect_ratio":"limit of n/p","risk":"limiting normalized squared coefficient error",
                 "grid":{"df":settings["df_values"],"delta":settings["delta_values"]},
                 "quadrature_order":order,"blas_threads_per_worker":1,
                 "complete":False,"completed_jobs":0,"expected_jobs":len(jobs),
-                "provenance":"new deterministic computation; not recovered historical output",
+                "provenance":"Deterministic quadrature calculation with configuration and source fingerprints recorded in this metadata",
                 "accuracy_note":"Completeness is a solver-success check, not an integration-error bound; compare quadrature orders near delta=1 and small df."}
     completed, pending = {}, []
     for i,j,df,delta in jobs:

@@ -1,77 +1,88 @@
 # High-dimensional rank regression
 
-Reproducibility code for **High-Dimensional Rank Regression: Exact Risk and Effective-Score Phase Transition**, by K. Sawaya, Y. Uematsu, and M. Imaizumi.
+Code and data for **High-Dimensional Rank Regression: Exact Risk and Effective-Score Phase Transition**, by K. Sawaya, Y. Uematsu, and M. Imaizumi.
 
-The project compares least squares (LS), least absolute deviations (LAD), and rank regression under Gaussian designs. It includes scalar risk solvers, finite-sample optimization, the paper's figure inputs, and the computational record of the corrected VM run.
+This repository compares least squares (LS), least absolute deviations (LAD), and rank regression under Gaussian designs. It provides scalar risk solvers, finite-sample simulations, and scripts for the paper's figures.
 
 ![LS, LAD, and Rank scaled risk as dimensionality increases](assets/animations/fig1a_scaled_risk.gif)
 
-**From the classical limit to high dimensions.** The horizontal axis is the Student-t degrees of freedom; the vertical axis is **δ α²(δ)**, where δ = n/p. The initial δ = ∞ frame shows the classical limiting constants. Subsequent frames decrease δ from 100 to 1.01 on a logarithmic grid rounded to three significant digits. The vertical axis rescales between frames. LS is omitted when its risk is infinite. [Animation data, checks, and generation code](docs/animation.md).
+The animation plots **δ α²(δ)** against the Student-t degrees of freedom, where n/p → δ in the proportional limit. It starts at the classical limiting constants (δ = ∞), then decreases δ from 100 to 1.01. The vertical axis rescales between frames; LS is omitted where its risk is infinite. [Animation details and generation code](docs/animation.md).
+
+## Installation
+
+Use Python 3.10–3.12 and run these commands from the repository root:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements-tested.txt
+python3 -m pip install -e '.[animation]'
+```
+
+On Windows, activate with `.venv\Scripts\activate`. For the notebook, also install `python3 -m pip install -e '.[notebook]'`.
 
 ## Reproduce the figures
 
-Use Python 3.10–3.12 from this repository's root:
-
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements-tested.txt
-python -m pip install -e '.[animation]'
 rank-repro audit --strict
 rank-repro figures --group all --output-dir build/figures
-python animation/render_gifs.py --output-dir build/animation
+python3 animation/render_gifs.py --output-dir build/animation
 ```
 
-On Windows, activate with `.venv\Scripts\activate`. The plotting command reads the corrected tables in `data/paper/`, recomputes deterministic scalar curves, and writes PDFs, PNGs, and numerical diagnostics. It does not launch Monte Carlo simulations or contact a VM. Rendering all static figures takes several minutes on a CPU; the committed outputs are in [`figures/`](figures/).
+The static figure command reads the tables in `data/paper/` and computes the remaining scalar curves. It writes PDF and PNG files without running finite-sample simulations. [Figure inputs and interpretation](docs/figure-map.md) · [Numerical methods and checks](docs/reproduction.md) · [Interactive notebook](notebooks/vis.ipynb).
 
-For an interactive entry point, install `python -m pip install -e '.[notebook]'` and open [`notebooks/vis.ipynb`](notebooks/vis.ipynb).
+To regenerate only Figures 8–10:
+
+```bash
+rank-repro figures --group heavy --figures 8 9 10 --output-dir build/figures
+```
 
 ## Numerical conventions
 
-- δ = n/p. Student-t errors have scale one, without variance standardization. The unpenalized LS risk is infinite for degrees of freedom at most two.
+- The asymptotic aspect ratio is defined by n/p → δ. Student-t errors have scale one, without variance standardization. Unpenalized LS risk is infinite for degrees of freedom at most two.
 - ARE(A:B) = risk(B) / risk(A); values above one favor A.
-- The penalized objective is `loss_average + (lambda/n) * sum(g(beta_j))`, with `g(b) = b²/2` for ridge and `g(b) = |b|` for lasso. Archived penalty labels are converted without altering their fitted risks.
-- Corrected penalized simulations use iid `0.8 delta_0 + 0.2 N(0,5)` coefficients. An all-zero vector is allowed and does not trigger a forced nonzero draw.
-- Figure 10 uses **median MSE to choose a penalty**, then displays **mean MSE at that penalty**, using the same repetitions. This is an oracle Monte Carlo comparison, not cross-validation.
-- Figure 1's checks cover 865 selected cells, not every cell. Finite penalty searches and close risk ties remain numerical limitations. Figure 8 retains its historical search interval, including one LS boundary optimum.
+- The penalized objective is `loss_average + (lambda/n) * sum(g(beta_j))`, with `g(b) = b²/2` for ridge and `g(b) = |b|` for lasso.
+- Penalized simulations use iid `0.8 delta_0 + 0.2 N(0,5)` coefficients.
+- Figure 10 selects each penalty by median Monte Carlo MSE, then displays mean MSE at that penalty using the same repetitions. This is oracle tuning, not cross-validation.
 
-## Recompute the experiments
-
-The correction plan uses historical inputs under `data/` and `data/recovered/`; corrected publication inputs under `data/paper/` are separate. Fresh runs include the successful quadrature extensions and fixed-rho fallback. Their source fingerprints differ from the archived run; the original numerical source is preserved for provenance.
+## Run the experiments
 
 ```bash
-# Inspect the workload without computing or contacting the cloud.
-python tools/run_recompute_plan.py --output-dir recompute-results --dry-run
+# Inspect the configured workload.
+python3 tools/run_recompute_plan.py --output-dir results --dry-run
 
-# Run locally (choose workers for your CPU and memory).
-python tools/run_recompute_plan.py --workers 8 --output-dir recompute-results
+# Compute locally, with one BLAS thread per worker.
+python3 tools/run_recompute_plan.py --workers 8 --output-dir results
+```
 
-# Or use an existing GCP VM, retrieve verified results, then stop it.
+The configured plan combines new calculations with saved inputs; its scope and the standalone experiment configurations are described in [the reproduction guide](docs/reproduction.md). Successful checkpoints are reused when the source and configuration match.
+
+An optional launcher runs the plan on an existing Google Cloud VM:
+
+```bash
 bash run_gcp.sh --project YOUR_PROJECT_ID --workers 100
 ```
 
-The cloud launcher asks which VM to use. **On any computation or pipeline error it keeps the VM running.** In direct mode, successful computation and a checksum-verified local download are both required before stopping; reconnect with `bash run_gcp.sh --resume RUN_ID` if the client was offline. [Execution and resume guide](docs/one-command-ja.md).
+It stops the selected VM only after successful computation and verified result retrieval. Errors leave the VM running. [Cloud execution and reconnecting](docs/reproduction.md#cloud-execution).
 
-The original production computation took approximately 27.5 hours on a Google Cloud Platform VM equipped with n2d-highcpu-128.
+The production computation took approximately 27.5 hours on a Google Cloud `n2d-highcpu-128` VM. Runtime depends on CPU, memory, and worker count.
 
-## Files and provenance
+## Repository contents
 
-| Location | Purpose |
+| Location | Contents |
 |---|---|
-| `src/rank_repro/` | Shared risk equations, solvers, simulations, plotting |
-| `data/paper/` | Corrected publication tables and annotated metadata |
-| `data/recovered/`, root `data/*.csv` | Historical inputs retained for the correction plan |
-| `figures/` | Static outputs, Gaussian residuals, Student-t curve values |
-| `animation/`, `assets/animations/` | GIF generator, grid, checks, README animation |
-| `configs/` | Correction plan, smoke plan, standalone experiment configurations |
-| `provenance/` | Archived fingerprints, metadata, checkpoint hashes, original numerical source |
-| `tools/` | Local/cloud execution, export, GitHub release preparation |
-| `tests/` | Numerical identities, independent optimization comparisons, workflow guards |
+| `src/rank_repro/` | Risk equations, optimization, simulations, plotting |
+| `data/paper/` | Figure tables and numerical metadata |
+| `data/recovered/`, root `data/*.csv` | Saved inputs used by the computation plan |
+| `figures/` | PDF/PNG figures and scalar-curve diagnostics |
+| `animation/`, `assets/animations/` | Animation grid, generator, and GIF |
+| `configs/` | Experiment and smoke-test configurations |
+| `provenance/` | Source snapshots and data/checkpoint hashes |
+| `tools/` | Execution, data import/export, and verification |
+| `tests/` | Numerical and workflow tests |
 
-Large raw checkpoints and per-repetition records belong in the versioned **GitHub Release asset**, not Git history. The publication tool builds that asset from the verified received archive and omits operational cloud logs and launch details.
+[Raw numerical records for v0.3.0](https://github.com/sawaya-ka/rank-regression/releases/download/v0.3.0/rank-results-v0.3.0.tar.gz) are available as a release asset (approximately 546 MB). See [`CITATION.cff`](CITATION.cff) for citation information.
 
 ```bash
-python -m unittest discover -s tests -v
+python3 -m unittest discover -s tests -v
 ```
-
-No software license has been selected on the author's behalf. `CITATION.cff` identifies the software and manuscript; add the publication DOI when available.

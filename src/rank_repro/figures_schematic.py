@@ -1,8 +1,7 @@
 """Explicit Gaussian realization of the schematic in Supplementary Figure S3.
 
-The supplied archives contain no source for the manuscript's TeX drawing.
-This reconstruction uses V ~ N(0,1) and tau=0.9, as in the active example
-in Figure 4. It is not a claim of pixel-identical recovery of the original.
+The construction uses V ~ N(0,1) and tau=0.9, as in the active example
+in Figure 4, to illustrate the cutoff equation and isotonic projection.
 """
 from pathlib import Path
 

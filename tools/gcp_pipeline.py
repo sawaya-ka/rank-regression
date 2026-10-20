@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a reviewed experiment plan on an existing GCP VM; collect before stopping.
+"""Run an experiment plan on an existing GCP VM; collect before stopping.
 
 No cloud operation occurs at import time or with --dry-run.
 The local client requires only Python >= 3.9 and an authenticated gcloud CLI.
@@ -603,7 +603,7 @@ def remote_main(run_directory):
             with (run_dir / "logs/environment.txt").open("w") as installed:
                 subprocess.run([python, "-m", "pip", "freeze"], check=True, stdout=installed,
                                stderr=log, env=environment)
-            # The reviewed orchestrator owns scientific stages and resume checks.
+            # The experiment runner handles computational stages and resume checks.
             argv = [python, str(project / "tools/run_recompute_plan.py"), "--plan", state["plan"],
                     "--output-dir", str(run_dir / "results"), "--workers", str(state["workers"])]
             log.write("Command: " + shlex.join(argv) + "\n")

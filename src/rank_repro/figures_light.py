@@ -1,8 +1,9 @@
 """Figures 1–6 and S1–S2: theoretical risks, scores, and isotonic geometry.
 
-Figure 1 preserves the archived Student-t phase-grid values. The legacy
-100-node grid is not uniformly converged near delta=1 and small nu; see
-reproducibility notes. Other Student-t curves are recomputed with 300 nodes.
+Figure 1 uses the supplied Student-t phase grid. The paper data combine
+the original 100-node grid with selected higher-order quadrature results;
+see ``docs/reproduction.md`` for numerical accuracy near delta=1 and small nu.
+Other Student-t curves are computed with 300 nodes.
 No artificial data point at delta=1 is inserted.
 """
 from pathlib import Path
@@ -133,7 +134,7 @@ def make_figure(csv_path="tmp_student_t_phase.csv", *, figsize=(7.6, 6.8),
         ax2.set_yscale("log")
         ax2.set_ylim(ymin, ymax)
         ax2.set_xlabel(r"Degrees of freedom $\nu$")
-        ax2.set_ylabel(r"$\delta=n/p$")
+        ax2.set_ylabel(r"$\delta$")
         ax2.set_title("(b) Efficiency phase diagram", loc="left", fontsize=12, pad=7)
         _ticks(ax2, "y", [1.001, 1.5, 2, 5, 10, 20, 50], (ymin, ymax))
         _winner_labels(ax2, x, y, winner, label_positions, winner_fontsize)
@@ -177,7 +178,7 @@ def _gaussian_efficiency():
                label=r"$\delta_{\rm c}=\sqrt{2}$")
     ax.axhline(3/np.pi, color="0.4", ls="--", lw=1.5, label=r"$3/\pi$")
     ax.axhline(2/np.pi, color="0.5", ls=":", lw=1.5, label=r"$2/\pi$")
-    ax.set(xscale="log", xlim=(1, 10), ylim=(0, 1.02), xlabel=r"$\delta=n/p$", ylabel="ARE")
+    ax.set(xscale="log", xlim=(1, 10), ylim=(0, 1.02), xlabel=r"$\delta$", ylabel="ARE")
     ax.legend(loc="lower right", facecolor="white", fontsize=9)
     return fig
 
@@ -267,7 +268,7 @@ def _atom_figure():
     ax.plot(delta,np.zeros_like(delta),color=COLORS[0],lw=2.7,ls=":",label="LS: 0")
     ax.axvline(dc,color="0.6",ls="-.",lw=1.5)
     ax.text(dc+.02,.89,r"$\delta_{\rm c}=\sqrt{2}$",fontsize=16)
-    ax.set(xlabel=r"$\delta=n/p$",ylabel=r"$p_0(\delta)$",ylim=(-.035,1.015))
+    ax.set(xlabel=r"$\delta$",ylabel=r"$p_0(\delta)$",ylim=(-.035,1.015))
     ax.legend(facecolor="white",loc="upper right")
     return fig
 
@@ -302,14 +303,14 @@ def _student_figures():
     for ax, ylabel in ((ax_rank,r"$\alpha_{\rm LS}^2/\alpha_*^2$"),
                        (ax_lad,r"$\alpha_{\rm LS}^2/\alpha_{\rm LAD}^2$"),
                        (ax_comparison,r"$\alpha_*^2/\alpha_{\rm LAD}^2$")):
-        ax.set(xscale="log",yscale="log",xlim=(1,10),xlabel=r"$\delta=n/p$",ylabel=ylabel)
+        ax.set(xscale="log",yscale="log",xlim=(1,10),xlabel=r"$\delta$",ylabel=ylabel)
         ax.axhline(1,color="0.5",ls=":",lw=1.5)
         ax.legend(ncol=2,facecolor="white",fontsize=9)
     return (fig_rank,fig_lad,fig_comparison), rows
 
 
 def generate_light_figures(data_dir: Path, output_dir: Path) -> list[Path]:
-    """Generate all light figures in PDF+PNG; preserve the original phase cache.
+    """Generate all light figures in PDF+PNG using the supplied phase grid.
 
     The deterministic Student-t curves take a few minutes on one CPU.
     Gaussian score residuals and computed Student-t curves are also exported.
@@ -325,7 +326,7 @@ def generate_light_figures(data_dir: Path, output_dir: Path) -> list[Path]:
         if metadata.get("complete") is False:
             raise ValueError("The Student-t phase grid has unresolved numerical checks; inspect its metadata before plotting.")
         if not metadata.get("recomputation"):
-            warnings.warn("Figure 1 uses the supplied Student-t grid; the bundled 100-node archive is quadrature-sensitive at low df near delta=1. See the reproduction notes.",UserWarning,stacklevel=2)
+            warnings.warn("The original 100-node Student-t grid is quadrature-sensitive at low df near delta=1. See docs/reproduction.md.",UserWarning,stacklevel=2)
         fig,_ = make_figure(data_dir/"unpenalized_student_t.csv")
         paths += _save(fig,output_dir,"fig01_student_efficiency")
         paths += _save(_gaussian_efficiency(),output_dir,"fig02_gaussian_efficiency")

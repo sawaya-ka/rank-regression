@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Gaussian self-consistency solutions and effective scores for LS, LAD, and rank.
 
-The noise is Z~N(0,1), delta=n/p>1, and V=alpha*G+Z. All three scores
+The noise is Z~N(0,1), n/p converges to delta>1, and V=alpha*G+Z. All three scores
 satisfy alpha**2=delta*E[psi(V)**2] and alpha=delta*E[G*psi(V)].
 The Gaussian reduction uses closed forms plus a scalar root for the active
 rank branch. ``verify_self_consistency`` checks both equations independently

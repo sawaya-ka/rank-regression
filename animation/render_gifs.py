@@ -85,7 +85,7 @@ def render_frame(df, delta, risk, mode):
         fig.text(.115, .91, 'Regression risk under Student-t errors', fontsize=16, weight='semibold')
         subtitle = ('Classical limit' if np.isinf(delta) else 'Proportional high-dimensional limit')
         fig.text(.115, .863, subtitle, fontsize=11.5, color='#555555')
-        fig.text(.97, .865, rf'$\delta=n/p={delta_label(delta)}$', ha='right', fontsize=20)
+        fig.text(.97, .865, rf'$\delta={delta_label(delta)}$', ha='right', fontsize=20)
         if not is_zero:
             draw_background(ax, x, y)
         for k in range(3):

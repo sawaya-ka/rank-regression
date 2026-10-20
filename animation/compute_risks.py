@@ -96,7 +96,7 @@ def main():
             rows.append({'delta':d, 'df':nu, 'alpha2_LS':risks[i,0,j], 'alpha2_LAD':risks[i,1,j], 'alpha2_Rank':risks[i,2,j], 'rank_cutoff':cutoffs[i,j], 'quadrature_order':args.order})
     pd.DataFrame(rows).to_csv(args.output_dir/'risk_grid.csv',index=False)
     report = {'noise':'standard Student-t with location zero and scale one; not variance standardized',
-              'delta_definition':'n/p', 'finite_grid':'100 descending log-spaced delta values from 100 to 1.01, rounded to 3 significant digits before solving',
+              'delta_definition':'limit of n/p', 'finite_grid':'100 descending log-spaced delta values from 100 to 1.01, rounded to 3 significant digits before solving',
               'df_grid':'100 logarithmic values from 1 to 50, augmented with 2, 3 and classical winner crossings',
               'delta_count':len(delta), 'df_count':len(df), 'order':args.order,
               'checks':sorted(checks,key=lambda x:(x['df'],-x['delta'])),

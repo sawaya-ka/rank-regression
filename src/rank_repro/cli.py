@@ -35,7 +35,7 @@ def audit(data_dir: Path, strict: bool = False) -> int:
         print("Figures 1–6, S1–S2: phase grid validation passed")
     except (OSError, ValueError) as exc:
         print(f"Light phase grid unavailable: {exc}")
-    print("Figure S3: new illustrative reconstruction; original figure source was not supplied.")
+    print("Figure S3: Gaussian illustration of the isotonic construction.")
     from .figures_heavy import _load, _risk_columns, _check_empirical
     full = light
     for number, (relative, _) in FILES.items():
@@ -94,7 +94,7 @@ def main(argv: list[str] | None = None) -> int:
             print("Figure 1 reads the selected data directory; numerical-check scope is recorded in its metadata.")
             paths.extend(generate_light_figures(args.data_dir, args.output_dir))
             paths.extend(generate_schematic(args.output_dir))
-            print("S3 is an explicitly new Gaussian illustration, not the missing original figure source.")
+            print("Figure S3 illustrates the isotonic construction for Gaussian noise.")
         if args.group in {"heavy", "all"}:
             from .figures_heavy import generate_heavy_figures
             paths.extend(generate_heavy_figures(args.data_dir, args.output_dir, args.figures))

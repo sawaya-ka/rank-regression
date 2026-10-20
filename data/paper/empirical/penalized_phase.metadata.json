@@ -432,40 +432,6 @@
       "all_estimators": "lambda_paper = actual_delta * lambda_archived, with actual_delta=n/p",
       "unchanged_columns": "lambda_eff_* (coefficient lambda_archived/p = lambda_paper/n), counts and source labels",
       "risk_effect": "none; same selected fitted estimators"
-    },
-    "manuscript_figure_verification": {
-      "source": "results/main_lambda_tuned_parallel_100rep5/penalized_t_mse_phase_summary.csv",
-      "reference_figure": "Rank/img/mse_winner_phase_pen.pdf",
-      "manuscript_physical_page": 19,
-      "criterion": "mse_median",
-      "display_statistic": "mse_mean",
-      "proof": [
-        {
-          "penalty": "ridge",
-          "image_width": 1692,
-          "image_height": 1202,
-          "reference_pixel_sha256": "e8b6c466a5b15398e96219fff6d3d0e223bd8e60e23dd99a9925c6b5cb71a981",
-          "manuscript_pixel_sha256": "e8b6c466a5b15398e96219fff6d3d0e223bd8e60e23dd99a9925c6b5cb71a981",
-          "identical_pixels": true,
-          "classification_matches_mean": 2500,
-          "classification_matches_median": 2251,
-          "grid_cells_checked": 2500
-        },
-        {
-          "penalty": "lasso",
-          "image_width": 1692,
-          "image_height": 1202,
-          "reference_pixel_sha256": "822ae5156f53ba8f346ed8b370566012fd85b9805c4d34ab83a7d7f06305fd5f",
-          "manuscript_pixel_sha256": "822ae5156f53ba8f346ed8b370566012fd85b9805c4d34ab83a7d7f06305fd5f",
-          "identical_pixels": true,
-          "classification_matches_mean": 2500,
-          "classification_matches_median": 2168,
-          "grid_cells_checked": 2500
-        }
-      ],
-      "pdf_creation_date": "D:20260613102910Z",
-      "audit_report_sha256": "ae1c18ee845fbeb9784adf3a9890fd35b40b08cd40b81cb1a6e73d28ccf8a023",
-      "scope": "All 5000 winner classifications match; this verifies plotted classes, not unique identity of all underlying numerical risks."
     }
   },
   "current_csv_sha256": "0e85fd2d209d35d0516dc0a9f941f12858688a525487b937488a9c2f88c3a709",
@@ -484,7 +450,6 @@
   "replicate_level_results_included": false,
   "replicate_level_results_location": "raw GitHub Release asset: results/checkpoints/ and results/diagnostics/",
   "replicate_level_results_scope": "Selected Rank repetitions at all 5000 grid points; selected LS/LAD repetitions at the 760 signal-repair points. Candidate-search traces are also present. Retained LS/LAD repetitions at other points are not newly included.",
-  "publication_metadata_note": "Numerical CSV bytes and archived config fingerprints are unchanged. Original metadata are preserved under provenance/original-metadata/. Publication annotations clarify numerical checks and raw-record availability.",
   "full_table_search_boundary_counts": {
     "ls": {
       "lower": 12,

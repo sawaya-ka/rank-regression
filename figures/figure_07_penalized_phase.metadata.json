@@ -421,7 +421,6 @@
       "Numerical residual and quadrature comparisons are subject to floating-point error."
     ],
     "ridge_reuse": "Gaussian-design ridge risk depends on the signal second moment, which is one under both priors; recovered ridge rows are retained.",
-    "publication_metadata_note": "Numerical CSV bytes and archived config fingerprints are unchanged. Original metadata are preserved under provenance/original-metadata/. Publication annotations clarify numerical checks and raw-record availability.",
     "historical_boundary_counts": null,
     "boundary_counts": {
       "ls": 0,

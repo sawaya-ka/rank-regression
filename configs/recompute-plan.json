@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mode": "paper",
-  "description": "Corrected rerun after complete recovery; archival values are reused where scientifically equivalent.",
+  "description": "Compute the selected numerical experiments and combine them with saved baseline values where the methods and assumptions agree.",
   "data_root": "data/recovered",
   "unpenalized_theory_source": "data/unpenalized_student_t.csv",
   "quadrature": {

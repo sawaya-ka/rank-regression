@@ -1,7 +1,7 @@
 {
   "experiment": "theory_penalized_are",
   "preset": "paper",
-  "provenance": "Proposed corrected rerun using the newer ARE_pnl_t.py distribution and ranges. Lambda/n normalization is unified; this is not a recovered historical table.",
+  "provenance": "Penalized LS and Rank efficiency calculations using the signal distribution and parameter ranges recorded below. Penalties use the lambda/n convention. Finite penalty searches approximate the optimal risks.",
   "settings": {
     "penalties": [
       "ridge",

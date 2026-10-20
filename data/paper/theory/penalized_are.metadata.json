@@ -807,7 +807,6 @@
     "display_statistic": "limiting_risk"
   },
   "rerun_reasons": [
-    "The manuscript lambda panels require the corrected LS labels provided here; this is an exact relabeling, not a new experiment.",
     "The LS ridge optimum at df=3, delta=0.1 reaches the historical upper search bound."
   ],
   "boundary_counts": {
@@ -815,6 +814,5 @@
     "rank": 0
   },
   "imported_csv_sha256": "3de10d745b63b8ceefe26a26faef46000a119b53977eca2479c92f7cdcbd11a1",
-  "risk_round_trip_verified": true,
-  "publication_metadata_note": "Numerical CSV bytes and archived config fingerprints are unchanged. Original metadata are preserved under provenance/original-metadata/. Publication annotations clarify numerical checks and raw-record availability."
+  "risk_round_trip_verified": true
 }

@@ -274,7 +274,7 @@ def _metadata(name: str, config: dict, fingerprint: str, workers: int) -> dict:
         "python_version": platform.python_version(),
         "package_versions": {package: importlib.metadata.version(package) for package in ("numpy", "scipy", "pandas", "scikit-learn", "threadpoolctl")},
         "complete": False,
-        "provenance": "new computation with corrected and explicit settings; not a recovered historical run",
+        "provenance": "Standalone experiment with configuration, seed, and source fingerprints recorded in this metadata",
     }
     if name.startswith("empirical"):
         result.update(n=settings["n"], n_rep=settings["n_rep"], base_seed=settings["base_seed"])

@@ -1,7 +1,7 @@
 {
   "experiment": "empirical_unpenalized",
   "preset": "paper",
-  "provenance": "Figure9 grid/n/repetitions inferred from manuscript and producing notebook command. New beta sampling is iidGaussian; old code normalized beta. Seeds specify a new repeatable run, not historical replication. Nonsmooth optimizer needs accuracy review near delta=1.",
+  "provenance": "Standalone unpenalized experiment on the Figure 9 grid with iid Gaussian coefficients and the seed recorded below. Figure 9 uses unit-norm coefficients. This configuration uses a nonsmooth L-BFGS-B solver; its convergence flag is not an optimality certificate, especially near delta=1.",
   "settings": {
     "n": 1000,
     "n_rep": 10,

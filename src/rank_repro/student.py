@@ -1,4 +1,4 @@
-"""Unpenalized risk under standard Student-t noise, with delta = n/p.
+"""Unpenalized risk under standard Student-t noise, with n/p converging to delta.
 
 The scale is one (not variance-standardized). Quadrature represents the t
 law as a Gaussian scale mixture. The order controls numerical integration,
