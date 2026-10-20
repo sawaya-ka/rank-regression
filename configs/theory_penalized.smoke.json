@@ -1,0 +1,31 @@
+{
+  "experiment": "theory_penalized",
+  "preset": "smoke",
+  "provenance": "Small pipeline check; coarse settings are unsuitable for final figures.",
+  "settings": {
+    "penalties": [
+      "ridge",
+      "lasso"
+    ],
+    "beta_zero_prob": 0.8,
+    "beta_slab_var": 5.0,
+    "df_values": [
+      8.0,
+      10.0
+    ],
+    "delta_values": [
+      4.0,
+      10.0
+    ],
+    "lambda_min": 0.01,
+    "lambda_max": 30.0,
+    "n_lambda": 9,
+    "gh_n": 20,
+    "grid_size": 301,
+    "estimators": [
+      "ls",
+      "lad",
+      "rank"
+    ]
+  }
+}

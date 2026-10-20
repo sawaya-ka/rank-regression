@@ -1,0 +1,68 @@
+{
+  "archive_audit": "received-run-audit.json",
+  "raw_archive_sha256": "9186dbf80fdfe6b25b67a72f05d026015a3ab022d3ed023c0c925d2db2bc48f4",
+  "tests": {
+    "count": 103,
+    "passed": true
+  },
+  "figures": {
+    "regenerated": 13,
+    "twelve_received_figures_compared": true,
+    "pixel_identical_received_pngs": 11,
+    "figure8_pixel_difference": {
+      "pixels": 688,
+      "fraction": 0.00021616187005152695,
+      "max_channel_difference_out_of_255": 1
+    },
+    "student_curve_max_relative_risk_difference": 1.8354864849353762e-10,
+    "detail": "render-validation.json"
+  },
+  "animation": {
+    "original_retained": true,
+    "regeneration_sha256_identical": true,
+    "tests": 2
+  },
+  "source_replay": {
+    "parent_fingerprint_matches": true,
+    "fresh_fixed_rho_example_iterations": 3506,
+    "fresh_fixed_rho_example_mse_relative_difference": 5.84e-14
+  },
+  "smoke": {
+    "jobs": 4,
+    "completed": 4,
+    "workers": 2
+  },
+  "dry_run": {
+    "paper_jobs": 18365,
+    "gcp_cloud_operations": 0
+  },
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "2.2.3",
+    "matplotlib": "3.10.8",
+    "scikit-learn": "1.8.0",
+    "Pillow": "12.3.0"
+  },
+  "not_performed": [
+    "No new full production Monte Carlo run; received full run was audited.",
+    "No GCP actions.",
+    "No GitHub publication; remote operations tested with mocks."
+  ],
+  "public_raw_asset": {
+    "name": "rank-results-v0.3.0.tar.gz",
+    "bytes": 545799254,
+    "sha256": "67ffa4c7bdf1468885cdd8ebfb18f077bf67f3b6860fb8a757c1fc95946f1f82",
+    "files": 18441,
+    "excluded_files": [
+      "logs/launcher.log",
+      "logs/pipeline.log",
+      "status.json",
+      "launch.json"
+    ],
+    "original_archive_sha256": "9186dbf80fdfe6b25b67a72f05d026015a3ab022d3ed023c0c925d2db2bc48f4",
+    "verification": "Archive structure and selected retained records independently checked after the production-sized build."
+  },
+  "raw_audit_script_verified": true
+}

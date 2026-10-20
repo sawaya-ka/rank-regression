@@ -1,0 +1,8 @@
+{
+  "file": "virtualenv.pyz",
+  "version": "21.14.11",
+  "source_url": "https://bootstrap.pypa.io/virtualenv/3.10/virtualenv.pyz",
+  "sha256": "98ac9189aaadfbed7f4f3e2d5a146688bd7230ffef2122419d83f71a7ffbbd41",
+  "bytes": 11674065,
+  "purpose": "Offline venv and pip bootstrap using an installed Python; never downloads a new interpreter."
+}

@@ -1,0 +1,16 @@
+{
+  "experiment": "unpenalized_theory",
+  "preset": "smoke",
+  "provenance": "Small numerical verification, not a manuscript figure grid.",
+  "settings": {
+    "df_values": [
+      3.0,
+      8.0
+    ],
+    "delta_values": [
+      2.0,
+      10.0
+    ],
+    "n_quad": 300
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "noise": "standard Student-t with location zero and scale one; not variance standardized",
+  "delta_definition": "n/p",
+  "finite_grid": "100 descending log-spaced delta values from 100 to 1.01, rounded to 3 significant digits before solving",
+  "df_grid": "100 logarithmic values from 1 to 50, augmented with 2, 3 and classical winner crossings",
+  "delta_count": 100,
+  "df_count": 104,
+  "order": 600,
+  "checks": [
+    {
+      "df": 1.0,
+      "delta": 100.0,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 3.2361840434645777e-07,
+      "Rank_relative_difference": 2.1159629784585767e-08
+    },
+    {
+      "df": 1.0,
+      "delta": 2.03,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 2.1088998575687154e-09,
+      "Rank_relative_difference": 1.3756365940434356e-09
+    },
+    {
+      "df": 1.0,
+      "delta": 1.22,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 2.839604984646432e-10,
+      "Rank_relative_difference": 2.6499211581392106e-10
+    },
+    {
+      "df": 1.0,
+      "delta": 1.01,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.391199005832286e-10,
+      "Rank_relative_difference": 1.315248471010258e-10
+    },
+    {
+      "df": 1.4846125645656532,
+      "delta": 100.0,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 3.0349126801385303e-07,
+      "Rank_relative_difference": 2.2371707221573915e-08
+    },
+    {
+      "df": 1.4846125645656532,
+      "delta": 2.03,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 3.4174391479376446e-09,
+      "Rank_relative_difference": 1.3919117283343687e-09
+    },
+    {
+      "df": 1.4846125645656532,
+      "delta": 1.22,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.1356366200368653e-08,
+      "Rank_relative_difference": 1.4348982853406181e-08
+    },
+    {
+      "df": 1.4846125645656532,
+      "delta": 1.01,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 5.8933208196882e-06,
+      "Rank_relative_difference": 5.951592549849973e-06
+    },
+    {
+      "df": 2.0,
+      "delta": 100.0,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 2.768660707590156e-07,
+      "Rank_relative_difference": 2.053970458528222e-08
+    },
+    {
+      "df": 2.0,
+      "delta": 2.03,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.0900760508021956e-09,
+      "Rank_relative_difference": 9.038910206320453e-09
+    },
+    {
+      "df": 2.0,
+      "delta": 1.22,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 8.198519369368731e-08,
+      "Rank_relative_difference": 1.0114147064269107e-07
+    },
+    {
+      "df": 2.0,
+      "delta": 1.01,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 2.443451067291698e-05,
+      "Rank_relative_difference": 2.4663380062380084e-05
+    },
+    {
+      "df": 3.0,
+      "delta": 100.0,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 2.3069040254629097e-07,
+      "Rank_relative_difference": 3.4417461829861485e-09
+    },
+    {
+      "df": 3.0,
+      "delta": 2.03,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 3.442438832664023e-08,
+      "Rank_relative_difference": 7.20683055695077e-08
+    },
+    {
+      "df": 3.0,
+      "delta": 1.22,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 4.183336244087014e-07,
+      "Rank_relative_difference": 5.129861490410602e-07
+    },
+    {
+      "df": 3.0,
+      "delta": 1.01,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 9.474395613771834e-05,
+      "Rank_relative_difference": 9.559108715637542e-05
+    },
+    {
+      "df": 5.053750998868298,
+      "delta": 100.0,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.6142917493188217e-07,
+      "Rank_relative_difference": 5.074994438400425e-08
+    },
+    {
+      "df": 5.053750998868298,
+      "delta": 2.03,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.2792505552961488e-07,
+      "Rank_relative_difference": 2.4180055432653073e-07
+    },
+    {
+      "df": 5.053750998868298,
+      "delta": 1.22,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.212708246267284e-06,
+      "Rank_relative_difference": 1.4735255116681248e-06
+    },
+    {
+      "df": 5.053750998868298,
+      "delta": 1.01,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 8.009576850130094e-05,
+      "Rank_relative_difference": 8.02156327305381e-05
+    },
+    {
+      "df": 20.149292495375764,
+      "delta": 100.0,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 3.97673853696644e-08,
+      "Rank_relative_difference": 9.465220243655265e-08
+    },
+    {
+      "df": 20.149292495375764,
+      "delta": 2.03,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.6101165955100935e-07,
+      "Rank_relative_difference": 2.4914121502835367e-07
+    },
+    {
+      "df": 20.149292495375764,
+      "delta": 1.22,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 5.708565906337725e-07,
+      "Rank_relative_difference": 5.970859161570227e-07
+    },
+    {
+      "df": 20.149292495375764,
+      "delta": 1.01,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.0465563204058345e-06,
+      "Rank_relative_difference": 1.0465524701618773e-06
+    },
+    {
+      "df": 50.0,
+      "delta": 100.0,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.5173847584047728e-08,
+      "Rank_relative_difference": 5.086931346632468e-08
+    },
+    {
+      "df": 50.0,
+      "delta": 2.03,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 7.690039127567387e-08,
+      "Rank_relative_difference": 1.0433959494810639e-07
+    },
+    {
+      "df": 50.0,
+      "delta": 1.22,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 1.6686306813784028e-07,
+      "Rank_relative_difference": 1.6956343149890235e-07
+    },
+    {
+      "df": 50.0,
+      "delta": 1.01,
+      "orders": [
+        600,
+        1200
+      ],
+      "LAD_relative_difference": 2.1346701977272548e-07,
+      "Rank_relative_difference": 2.1346668122826622e-07
+    }
+  ],
+  "max_relative_difference": 9.559108715637542e-05,
+  "check_tolerance": 0.0005,
+  "limitation": "Quadrature order comparisons at selected points are numerical diagnostics, not rigorous or grid-uniform error bounds.",
+  "classical_frame": "Exact closed-form constants for lim delta*alpha^2. Raw risks tend to zero for LAD/Rank and for LS when df>2. LS remains infinite at df<=2.",
+  "elapsed_seconds": 330.15146230199935,
+  "robust_risks_all_finite_positive": true,
+  "robust_risks_nondecreasing_as_delta_decreases": true,
+  "robust_risks_nonincreasing_in_df": true,
+  "LS_infinite_exactly_for_df_le_2": true,
+  "minimum_relative_winner_gap": 7.446592439244716e-06,
+  "near_ties_with_relative_gap_below_1e_minus4": 8,
+  "winner_boundary_note": "Winner boundaries in the animation are interpolated between degrees-of-freedom grid points; small risk gaps should not be interpreted as statistically or numerically substantial advantages."
+}

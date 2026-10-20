@@ -1,0 +1,21 @@
+{
+  "experiment": "empirical_unpenalized",
+  "preset": "smoke",
+  "provenance": "Small simulation check, not a manuscript figure grid.",
+  "settings": {
+    "n": 40,
+    "n_rep": 2,
+    "base_seed": 20260610,
+    "rank_maxiter": 500,
+    "rank_gtol": 1e-06,
+    "rank_ftol": 1e-09,
+    "df_values": [
+      8.0,
+      10.0
+    ],
+    "delta_values": [
+      2.0,
+      4.0
+    ]
+  }
+}

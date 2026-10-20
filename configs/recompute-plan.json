@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "mode": "paper",
+  "description": "Corrected rerun after complete recovery; archival values are reused where scientifically equivalent.",
+  "data_root": "data/recovered",
+  "unpenalized_theory_source": "data/unpenalized_student_t.csv",
+  "quadrature": {
+    "orders": [
+      300,
+      600,
+      1200,
+      2400,
+      4800
+    ],
+    "relative_tolerance": 0.0005,
+    "near_tie_relative_gap": 0.01,
+    "low_df_max": 3,
+    "small_delta_max": 1.1
+  },
+  "theory_lasso": {
+    "beta_zero_prob": 0.8,
+    "beta_slab_var": 5.0,
+    "lambda_min": 0.01,
+    "lambda_max": 300.0,
+    "n_lambda": 200,
+    "gh_n": 60,
+    "grid_size": 1001,
+    "estimators": [
+      "ls",
+      "lad",
+      "rank"
+    ]
+  },
+  "empirical": {
+    "include_all_penalized_rank": true,
+    "rank_backend": "admm",
+    "rank_admm_maxiter": 50000,
+    "rank_admm_atol": 1e-06,
+    "rank_admm_rtol": 1e-05,
+    "rank_admm_fixed_rho_fallback": true
+  },
+  "figures": true
+}

@@ -1,0 +1,452 @@
+{
+  "scope": "Hashes, checkpoint numerical gates, table reconciliation, and asset completeness; no expensive experiments rerun.",
+  "errors": [],
+  "warnings": [
+    "Finite lambda searches and quadrature-order comparisons are numerical diagnostics, not proofs of unrestricted global optima or rigorous quadrature error bounds.",
+    "Only selected-lambda empirical repetitions are retained; unsuccessful lambda candidates in search traces need not invalidate an accepted selected candidate.",
+    "Figure 8 is unchanged historical finite-grid data; its LS ridge optimum at df=3, delta=0.1 reaches the upper search bound.",
+    "Retained LS/LAD empirical summaries use historical diagnostics except at 760 forced-signal points where all estimators were retuned.",
+    "Figure 10 tunes lambda using median MSE, then displays mean MSE at that selection on the same repetitions (oracle Monte Carlo comparison, not cross-validation).",
+    "Some metadata fields about replicate-level availability are stale: new raw selected repetitions exist for all Rank points and all methods at forced-signal correction points; historical retained LS/LAD raw availability must be stated separately.",
+    "Archive contains generated Figures 1–10 and S1–S2. The separate S3 schematic is a reconstruction and is not in this run archive."
+  ],
+  "dataset_hashes": {
+    "empirical/penalized_phase.csv": {
+      "sha256": "0e85fd2d209d35d0516dc0a9f941f12858688a525487b937488a9c2f88c3a709",
+      "matches_manifest": true,
+      "rows": 5000,
+      "unique_coordinate_count": 5000
+    },
+    "empirical/unpenalized_phase.csv": {
+      "sha256": "05da904fd1bdc749f96b879cfcda18636592d46849b651a486a787f428a94603",
+      "matches_manifest": true,
+      "rows": 2500,
+      "unique_coordinate_count": 2500
+    },
+    "gaussian_parameters.csv": {
+      "sha256": "d11f5a8147fe49f9ce919400a022caf528fac5a79afc278c25294211283ae4b4",
+      "matches_manifest": true,
+      "rows": 24
+    },
+    "gaussian_scores.csv": {
+      "sha256": "f7e3e7157d388ebfd45276b4c69d9d855be848568720b98627a758f5b78eab8d",
+      "matches_manifest": true,
+      "rows": 96024
+    },
+    "theory/penalized_are.csv": {
+      "sha256": "3de10d745b63b8ceefe26a26faef46000a119b53977eca2479c92f7cdcbd11a1",
+      "matches_manifest": true,
+      "rows": 3600,
+      "unique_coordinate_count": 3600
+    },
+    "theory/penalized_phase.csv": {
+      "sha256": "39b6c9e2718618673e3aef7baccbfa6b2492793049f8d7ee92b1ec1d7815f3fd",
+      "matches_manifest": true,
+      "rows": 20000,
+      "unique_coordinate_count": 20000
+    },
+    "unpenalized_student_t.csv": {
+      "sha256": "5ac319a295ed320bc68728d9e1f5783450a4bb46e706541910781c84e6becb02",
+      "matches_manifest": true,
+      "rows": 10000,
+      "unique_coordinate_count": 10000
+    }
+  },
+  "fixed_rho_repair": {
+    "job_id": "012716_unpenalized_rank",
+    "changed_repetitions": [
+      4
+    ],
+    "preserved_repetitions": 9,
+    "seed": 1830907643,
+    "iterations": 3506,
+    "rho": 0.001,
+    "mse": 19.043678057884193
+  },
+  "checkpoint_counts": {
+    "quadrature": 865,
+    "theory_lasso": 10000,
+    "unpenalized_rank": 2500,
+    "penalized_repair": 5000
+  },
+  "checkpoint_origins": {
+    "parent": 18346,
+    "repaired": 19
+  },
+  "checkpoint_hashes_verified": 18365,
+  "raw_repetitions": {
+    "unpenalized_rank": 25000,
+    "penalized_repair": 326000
+  },
+  "raw_by_estimator": {
+    "unpenalized_rank:rank": 25000,
+    "penalized_repair:rank": 250000,
+    "penalized_repair:LS": 38000,
+    "penalized_repair:LAD": 38000
+  },
+  "raw_solver_statuses": {
+    "unpenalized_rank:zero_loss_solution": 500,
+    "unpenalized_rank:converged": 24500,
+    "penalized_repair:converged": 250000,
+    "penalized_repair:closed_form": 18900,
+    "penalized_repair:CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH": 18900,
+    "penalized_repair:sklearn_lasso_path": 19100,
+    "penalized_repair:QuantileRegressor": 19100
+  },
+  "maxima": {
+    "quadrature_relative_change": 0.0004925858104158892,
+    "theory_selected_residual_squared": 2.0738975022133504e-06,
+    "unpenalized_rank_duality_gap_tolerance_ratio": 0.9999946603348129,
+    "unpenalized_rank_primal_residual_tolerance_ratio": 0.9999845363994126,
+    "unpenalized_rank_dual_residual_tolerance_ratio": 0.9999990107641769,
+    "penalized_repair_duality_gap_tolerance_ratio": 0.9999993332853901,
+    "penalized_repair_primal_residual_tolerance_ratio": 0.9999998775545195,
+    "penalized_repair_dual_residual_tolerance_ratio": 0.9999999603815873
+  },
+  "quadrature_orders": {
+    "1200": 10,
+    "600": 837,
+    "2400": 15,
+    "4800": 3
+  },
+  "repaired_jobs": [
+    {
+      "job_id": "000077_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 90.69468574800703,
+      "order": 2400,
+      "max_relative_change": 4.959248020755017e-05
+    },
+    {
+      "job_id": "000088_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 86.43439184899034,
+      "order": 2400,
+      "max_relative_change": 6.013694199863086e-05
+    },
+    {
+      "job_id": "000101_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 93.66557524699601,
+      "order": 2400,
+      "max_relative_change": 7.226773357340272e-05
+    },
+    {
+      "job_id": "000118_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 96.58657344400126,
+      "order": 2400,
+      "max_relative_change": 8.624227572131495e-05
+    },
+    {
+      "job_id": "000142_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 84.7935030249937,
+      "order": 2400,
+      "max_relative_change": 0.00010237704529418564
+    },
+    {
+      "job_id": "000162_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 89.98002332600299,
+      "order": 2400,
+      "max_relative_change": 0.00012105666557666618
+    },
+    {
+      "job_id": "000165_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 86.96288824100338,
+      "order": 2400,
+      "max_relative_change": 0.0001427422861462147
+    },
+    {
+      "job_id": "000168_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 71.12567498999124,
+      "order": 2400,
+      "max_relative_change": 0.00016797797008845272
+    },
+    {
+      "job_id": "000171_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 92.52082300999609,
+      "order": 2400,
+      "max_relative_change": 0.0001973921676463409
+    },
+    {
+      "job_id": "000174_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 94.44059979400481,
+      "order": 2400,
+      "max_relative_change": 0.00023168741433240747
+    },
+    {
+      "job_id": "000177_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 68.78178298800776,
+      "order": 2400,
+      "max_relative_change": 0.0002716010512724514
+    },
+    {
+      "job_id": "000180_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 79.32755010300025,
+      "order": 2400,
+      "max_relative_change": 0.00031779826311730805
+    },
+    {
+      "job_id": "000183_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 91.03615404599987,
+      "order": 2400,
+      "max_relative_change": 0.00037062094071889536
+    },
+    {
+      "job_id": "000186_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 88.71638869898743,
+      "order": 2400,
+      "max_relative_change": 0.000429586159873955
+    },
+    {
+      "job_id": "000189_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 72.42551841099339,
+      "order": 2400,
+      "max_relative_change": 0.0004925858104158892
+    },
+    {
+      "job_id": "000192_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 408.73669833899476,
+      "order": 4800,
+      "max_relative_change": 8.28254542824452e-05
+    },
+    {
+      "job_id": "000195_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 334.65054918598616,
+      "order": 4800,
+      "max_relative_change": 9.617489572614524e-05
+    },
+    {
+      "job_id": "000198_quadrature",
+      "kind": "quadrature",
+      "elapsed_seconds": 338.4432877900108,
+      "order": 4800,
+      "max_relative_change": 0.0001101375815727593
+    },
+    {
+      "job_id": "012716_unpenalized_rank",
+      "kind": "unpenalized_rank",
+      "elapsed_seconds": 1.1797386669932166
+    }
+  ],
+  "table_field_comparisons": 744825,
+  "update_fields_not_in_csv": {},
+  "invalid_theory_search_candidates": {
+    "theory_lasso": 556423
+  },
+  "infinite_ls_serialization_conversions": 342,
+  "repair_source_hashes": {
+    "empirical_solver.py": {
+      "sha256": "11313d2b6279ef8e47a2d3b14f53d37a79ca4620e1900ca80cacfaab4f2807f7",
+      "matches_manifest": true
+    },
+    "repair_gcp.py": {
+      "sha256": "c11cc1113a7ae19afa42d40cdea4cd7a2292d7353e77c73f4918048fb21ac072",
+      "matches_manifest": true
+    },
+    "repair_run.py": {
+      "sha256": "056663ef163d5802bae0c9c8788a7e6e026dbf068816ac421e11d25a76355739",
+      "matches_manifest": true
+    }
+  },
+  "figures": [
+    {
+      "name": "fig01_student_efficiency.pdf",
+      "bytes": 27147,
+      "sha256": "fc92602ba45ece3b5aee095ffdd101c9b37a3030074af3b598f8afc8f5d7ba1f"
+    },
+    {
+      "name": "fig01_student_efficiency.png",
+      "bytes": 172806,
+      "sha256": "265f1c645d84667a37f989d19160451b6475d5004459cca6ff461a828fd382c4"
+    },
+    {
+      "name": "fig02_gaussian_efficiency.pdf",
+      "bytes": 22315,
+      "sha256": "a5d2e536f27118702a085c2bf43960348a51b03209dd7af5195f635717455157"
+    },
+    {
+      "name": "fig02_gaussian_efficiency.png",
+      "bytes": 79421,
+      "sha256": "87fabbde8cab550845af290209ab0fe411b03e1d2bfc61b0b08afda3387e09f7"
+    },
+    {
+      "name": "fig03_student_rank_vs_ls.pdf",
+      "bytes": 21151,
+      "sha256": "956e9327ae603034f7b585cc8ae2a72cd3487148471f5149ac66fd361278fb08"
+    },
+    {
+      "name": "fig03_student_rank_vs_ls.png",
+      "bytes": 132155,
+      "sha256": "83b9ef84ed598241c6df0eaeab8a905adc1bf2df1886e785394747f46e924e2b"
+    },
+    {
+      "name": "fig04_isotonic_projection.pdf",
+      "bytes": 32657,
+      "sha256": "371dbc3e7a457ac8a563abf419d9637fd9d4426f929c2e1aecc54baa6a2adf9f"
+    },
+    {
+      "name": "fig04_isotonic_projection.png",
+      "bytes": 262344,
+      "sha256": "9d136206d2585a04168b247450c55cbe8e69164fcaae3d1c167adb169439268b"
+    },
+    {
+      "name": "fig05_effective_scores.pdf",
+      "bytes": 22713,
+      "sha256": "4e74ceaab8c51c4434ec23d95ba56d6d7f732b07b4bceb2e4a4929693676f7c0"
+    },
+    {
+      "name": "fig05_effective_scores.png",
+      "bytes": 298127,
+      "sha256": "91ece477b81c95cb4743b3d00623dbce4696c1f70bad754e3242aafbd23e7b1d"
+    },
+    {
+      "name": "fig06_proximal_atom.pdf",
+      "bytes": 16988,
+      "sha256": "643a5a7c8a712bbcff6f2206251fd553594c7ad0d8d7ef1a917c2a5e76a35276"
+    },
+    {
+      "name": "fig06_proximal_atom.png",
+      "bytes": 88556,
+      "sha256": "145f52b4adde26f317e79711ba763a99587759c0c01cbf349b7df6ec6949ede8"
+    },
+    {
+      "name": "figS01_student_lad_vs_ls.pdf",
+      "bytes": 19964,
+      "sha256": "58a674ca40201c00a86f66bf0534eb59690f05fcfe0419bc3ca56eb08c892045"
+    },
+    {
+      "name": "figS01_student_lad_vs_ls.png",
+      "bytes": 110625,
+      "sha256": "d884e9b573dd488232714b0333b79c6e0e5c5098b089187ffc12326667b1f57d"
+    },
+    {
+      "name": "figS02_student_rank_over_lad.pdf",
+      "bytes": 22995,
+      "sha256": "3aea7bd3690de3b1b2b63fa4919441a1232d279eb3f288868d48704c5159401b"
+    },
+    {
+      "name": "figS02_student_rank_over_lad.png",
+      "bytes": 122828,
+      "sha256": "e563e7668a5090abc730f45ed6c7d8e15af33034949202db860350094593e691"
+    },
+    {
+      "name": "figure_07_penalized_phase.metadata.json",
+      "bytes": 12195,
+      "sha256": "9f785d3f1791bf90747cba0bebdb3b5ce88f0f883a59332c4bdbe6c129f9a244"
+    },
+    {
+      "name": "figure_07_penalized_phase.pdf",
+      "bytes": 20319,
+      "sha256": "35090c3b13bd23c217fd79e2ba4ba58a1d9eda4556fa4370565969cf5aaed03c"
+    },
+    {
+      "name": "figure_07_penalized_phase.png",
+      "bytes": 48695,
+      "sha256": "0641a2022b08fc0d2d597055a9488d1fafdf5d85ad627c515359b5f30443928d"
+    },
+    {
+      "name": "figure_08_penalized_are.metadata.json",
+      "bytes": 23273,
+      "sha256": "42d472e67dba7d8c7ef929ec54413c609c0dc51906ff82f4f20f6b37f9fd37f3"
+    },
+    {
+      "name": "figure_08_penalized_are.pdf",
+      "bytes": 78553,
+      "sha256": "420d0864315e573d0fa8a8c55389d779c86f30ac3ab7dddb45857c819eadb449"
+    },
+    {
+      "name": "figure_08_penalized_are.png",
+      "bytes": 574624,
+      "sha256": "d1086c64a2e8692bd08f7b2cac8fae83b00c222ee06cb408714a570d1c27e5d9"
+    },
+    {
+      "name": "figure_09_empirical_unpenalized.metadata.json",
+      "bytes": 12249,
+      "sha256": "fa394192800504865676cbc0d9e8fe783c97aba532396ecdc6d239641eb736a9"
+    },
+    {
+      "name": "figure_09_empirical_unpenalized.pdf",
+      "bytes": 19441,
+      "sha256": "1ad35f7c6c044be9d08aacaecd23b8c3880c2356e672f0e6376525f10f18bdaa"
+    },
+    {
+      "name": "figure_09_empirical_unpenalized.png",
+      "bytes": 55373,
+      "sha256": "2994981e54e1799b5a649fafcfd277e0336da137c23b312af37b30c2c1506e0b"
+    },
+    {
+      "name": "figure_10_empirical_penalized.metadata.json",
+      "bytes": 16205,
+      "sha256": "5c0f7c408919cd3ba67eb1083492c979c464c85cfcb21069b39842c06deba29f"
+    },
+    {
+      "name": "figure_10_empirical_penalized.pdf",
+      "bytes": 23157,
+      "sha256": "a53db41d7c961b0e54a0cbe6f67fab3f37807ea8a6ea7da345592017fd433458"
+    },
+    {
+      "name": "figure_10_empirical_penalized.png",
+      "bytes": 91314,
+      "sha256": "f13a3bf04fbdcd1189670891735d69b551eaca16d2734c76c4741bef4430d59a"
+    },
+    {
+      "name": "gaussian_diagnostics.json",
+      "bytes": 3238,
+      "sha256": "b8c7f6e79f269ba9de5fd2f820ff25c50a1d681ec3e48bdc21317f45af2002ff"
+    },
+    {
+      "name": "student_risk_curves.csv",
+      "bytes": 84305,
+      "sha256": "e2092c4dc53ff12d9c91ea78f9db5da3a97b65856113adbc304cdb9a3aa1540a"
+    }
+  ],
+  "run_status": {
+    "mode": "paper",
+    "fingerprint": "80e2d1b5014ebb2019f5dd5851c53f9543b1639a00d7a4a410e26ce8edad9375",
+    "parent_fingerprint": "17d6759bacbcbeb3c821745b21e102216e67dc3ac023fc618d22190d75ffe39a",
+    "complete": true,
+    "status": "complete",
+    "jobs": {
+      "quadrature": 865,
+      "theory_lasso": 10000,
+      "unpenalized_rank": 2500,
+      "penalized_repair": 5000
+    },
+    "workers": 2,
+    "reused_jobs": 18346,
+    "cached_repaired_jobs": 0,
+    "pending_jobs": 0,
+    "figures_complete": true,
+    "last_job": "000198_quadrature",
+    "last_success": true,
+    "completed_jobs": 18365,
+    "failed_jobs": 0,
+    "failed_by_kind": {
+      "quadrature": 0,
+      "theory_lasso": 0,
+      "unpenalized_rank": 0,
+      "penalized_repair": 0
+    },
+    "updated_by_kind": {
+      "quadrature": 865,
+      "theory_lasso": 10000,
+      "unpenalized_rank": 2500,
+      "penalized_repair": 5000
+    }
+  },
+  "passed": true
+}

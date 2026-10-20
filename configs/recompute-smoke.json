@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "mode": "smoke",
+  "description": "Small local/cloud workflow test; not paper results.",
+  "data_root": "data/recovered",
+  "unpenalized_theory_source": "data/unpenalized_student_t.csv",
+  "quadrature": {
+    "orders": [
+      100,
+      200
+    ],
+    "relative_tolerance": 0.005,
+    "near_tie_relative_gap": 0.01,
+    "low_df_max": 3,
+    "small_delta_max": 1.1
+  },
+  "theory_lasso": {
+    "beta_zero_prob": 0.8,
+    "beta_slab_var": 5.0,
+    "lambda_min": 0.01,
+    "lambda_max": 300.0,
+    "n_lambda": 7,
+    "gh_n": 20,
+    "grid_size": 151,
+    "estimators": [
+      "ls",
+      "lad",
+      "rank"
+    ]
+  },
+  "empirical": {
+    "include_all_penalized_rank": true,
+    "rank_backend": "admm",
+    "rank_admm_maxiter": 50000,
+    "rank_admm_atol": 1e-06,
+    "rank_admm_rtol": 1e-05,
+    "rank_admm_fixed_rho_fallback": true,
+    "max_jobs_per_kind": 1,
+    "n_override": 30,
+    "n_rep_override": 1,
+    "force_all_methods": true,
+    "lambda_n_initial": 3,
+    "lambda_n_refine": 3,
+    "lambda_expand_rounds": 0,
+    "lambda_refine_rounds": 0
+  },
+  "figures": false
+}

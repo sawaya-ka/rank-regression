@@ -1,0 +1,37 @@
+{
+  "complete": true,
+  "config_fingerprint": "80e2d1b5014ebb2019f5dd5851c53f9543b1639a00d7a4a410e26ce8edad9375",
+  "parent_manifest": "parent_recovery_manifest.json",
+  "updated_rows": {
+    "quadrature": 865,
+    "theory_lasso": 10000,
+    "unpenalized_rank": 2500,
+    "penalized_repair": 5000
+  },
+  "datasets": {
+    "empirical/penalized_phase.csv": {
+      "sha256": "0e85fd2d209d35d0516dc0a9f941f12858688a525487b937488a9c2f88c3a709"
+    },
+    "empirical/unpenalized_phase.csv": {
+      "sha256": "05da904fd1bdc749f96b879cfcda18636592d46849b651a486a787f428a94603"
+    },
+    "gaussian_parameters.csv": {
+      "sha256": "d11f5a8147fe49f9ce919400a022caf528fac5a79afc278c25294211283ae4b4"
+    },
+    "gaussian_scores.csv": {
+      "sha256": "f7e3e7157d388ebfd45276b4c69d9d855be848568720b98627a758f5b78eab8d"
+    },
+    "theory/penalized_are.csv": {
+      "sha256": "3de10d745b63b8ceefe26a26faef46000a119b53977eca2479c92f7cdcbd11a1"
+    },
+    "theory/penalized_phase.csv": {
+      "sha256": "39b6c9e2718618673e3aef7baccbfa6b2492793049f8d7ee92b1ec1d7815f3fd"
+    },
+    "unpenalized_student_t.csv": {
+      "sha256": "5ac319a295ed320bc68728d9e1f5783450a4bb46e706541910781c84e6becb02"
+    }
+  },
+  "repair_manifest": "../repair_manifest.json",
+  "checkpoint_provenance": "../checkpoint_provenance.json",
+  "parent_fingerprint": "17d6759bacbcbeb3c821745b21e102216e67dc3ac023fc618d22190d75ffe39a"
+}

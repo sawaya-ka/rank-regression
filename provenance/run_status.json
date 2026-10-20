@@ -1,0 +1,34 @@
+{
+  "mode": "paper",
+  "fingerprint": "80e2d1b5014ebb2019f5dd5851c53f9543b1639a00d7a4a410e26ce8edad9375",
+  "parent_fingerprint": "17d6759bacbcbeb3c821745b21e102216e67dc3ac023fc618d22190d75ffe39a",
+  "complete": true,
+  "status": "complete",
+  "jobs": {
+    "quadrature": 865,
+    "theory_lasso": 10000,
+    "unpenalized_rank": 2500,
+    "penalized_repair": 5000
+  },
+  "workers": 2,
+  "reused_jobs": 18346,
+  "cached_repaired_jobs": 0,
+  "pending_jobs": 0,
+  "figures_complete": true,
+  "last_job": "000198_quadrature",
+  "last_success": true,
+  "completed_jobs": 18365,
+  "failed_jobs": 0,
+  "failed_by_kind": {
+    "quadrature": 0,
+    "theory_lasso": 0,
+    "unpenalized_rank": 0,
+    "penalized_repair": 0
+  },
+  "updated_by_kind": {
+    "quadrature": 865,
+    "theory_lasso": 10000,
+    "unpenalized_rank": 2500,
+    "penalized_repair": 5000
+  }
+}

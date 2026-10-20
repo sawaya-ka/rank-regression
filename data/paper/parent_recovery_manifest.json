@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "status": "complete_historical_tables_imported; scientific corrections still required",
+  "source_tree_modified": false,
+  "risks_recomputed": false,
+  "lambda_convention": "loss_average + (lambda/n) * sum(g(beta_j))",
+  "datasets": {
+    "theory/penalized_phase.csv": {
+      "rows": 20000,
+      "sha256": "2b8024a73c6655c3158cff13427a1cfa5b53d9b438345eb3a24f27920a94819d",
+      "source_files": [
+        {
+          "path": "t_phase_diagram_results_fast/phase_summary.csv",
+          "bytes": 4085483,
+          "sha256": "e19a1bf03bf113f3de4f10d34eac1e75c4db1eeac8270058dd77084dd5b247dc"
+        },
+        {
+          "path": "t_phase_diagram_results_fast/phase_meta.csv",
+          "bytes": 623,
+          "sha256": "5407e9059c34dd236bd4b41016659c97a36498c86e90caab7b8e1a3b1c08074b"
+        },
+        {
+          "path": "compute_t_phase_diagram_fast.py",
+          "bytes": 69938,
+          "sha256": "d61e0be561f165871a2df0d71edfd8a77e07c1164d3f5510007abe19772948fd"
+        }
+      ],
+      "figure": "7",
+      "boundary_counts": {
+        "ls": 0,
+        "lad": 1,
+        "rank": 0
+      },
+      "complete_grid": true,
+      "risk_values_unchanged": true,
+      "metadata": "theory/penalized_phase.metadata.json"
+    },
+    "theory/penalized_are.csv": {
+      "rows": 3600,
+      "sha256": "3de10d745b63b8ceefe26a26faef46000a119b53977eca2479c92f7cdcbd11a1",
+      "source_files": [
+        {
+          "path": "rank_penalty_results_t/opt_t_std_0.csv",
+          "bytes": 410048,
+          "sha256": "b2cc52c997b6c2aa45234a2d877b97002077ddfc9b20d23282de81fc46768f50"
+        },
+        {
+          "path": "ARE_pnl_t.py",
+          "bytes": 21518,
+          "sha256": "b996bc0967e037141603cd59ab7a2282e3dabdfe39c3ea179b3fb405b630dcd7"
+        }
+      ],
+      "figure": "8",
+      "boundary_counts": {
+        "ls": 1,
+        "rank": 0
+      },
+      "complete_grid": true,
+      "risk_values_unchanged": true,
+      "metadata": "theory/penalized_are.metadata.json"
+    },
+    "empirical/unpenalized_phase.csv": {
+      "rows": 2500,
+      "sha256": "f8daa2bb675977072ef2faa03e2e86470a904a61f548745ab74c1bcfdaeb56b5",
+      "source_files": [
+        {
+          "path": "results/t_mse_phase_test/t_mse_phase_summary.csv",
+          "bytes": 852301,
+          "sha256": "65ac778152248cf123a6f35ccce3ba8c055f4a7139dda164253536300df41e6e"
+        },
+        {
+          "path": "results/t_mse_phase_test/t_mse_phase_metadata.json",
+          "bytes": 3231,
+          "sha256": "fa57c4d4cdf1a0b1b4d9987d44f4ddeec0b2fddf9b97bc6851969c1062d123cd"
+        },
+        {
+          "path": "make_t_mse_phase_csv.py",
+          "bytes": 20272,
+          "sha256": "18c27243ddb4fa9408e8c2095d79904ec374cc404dc7e34c14ef325f41f1e427"
+        },
+        {
+          "path": "results/t_mse_phase_test/t_mse_phase_raw.csv",
+          "bytes": 5811320,
+          "sha256": "9cddd4505e7d9f33385883c5ecbe1053f5c04bb1ecb3579c3bef621a1a7f15b7"
+        }
+      ],
+      "figure": "9",
+      "boundary_counts": {},
+      "complete_grid": true,
+      "risk_values_unchanged": true,
+      "metadata": "empirical/unpenalized_phase.metadata.json"
+    },
+    "empirical/penalized_phase.csv": {
+      "rows": 5000,
+      "sha256": "492cf8ce8a4b95029ac51566876ad44c25dff6426d4ea026919a9329dcfc38eb",
+      "source_files": [
+        {
+          "path": "results/main_lambda_tuned_parallel_100rep5/penalized_t_mse_phase_summary.csv",
+          "bytes": 5664678,
+          "sha256": "009e58e77c554ddcaf6d64977cfb0f30d4a1c2b46d19da0351df1b52807e4158"
+        },
+        {
+          "path": "results/main_lambda_tuned_parallel_100rep5/penalized_t_mse_phase_metadata.json",
+          "bytes": 4571,
+          "sha256": "d1679745fe15df306e10b3a0dae04c9926757e2109090fa11d9d61c888501ae8"
+        },
+        {
+          "path": "make_penalized_t_mse_phase_csv_tuned.py",
+          "bytes": 48645,
+          "sha256": "489990413ab14927c10e629dd54f77d2fe57ce8b0c431aaa3701a2089e879d48"
+        }
+      ],
+      "figure": "10",
+      "boundary_counts": {
+        "LS": {
+          "lower": 12,
+          "upper": 76
+        },
+        "LAD": {
+          "lower": 0,
+          "upper": 0
+        },
+        "rank": {
+          "lower": 1,
+          "upper": 0
+        }
+      },
+      "complete_grid": true,
+      "risk_values_unchanged": true,
+      "metadata": "empirical/penalized_phase.metadata.json"
+    }
+  }
+}

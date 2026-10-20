@@ -1,0 +1,28 @@
+{
+  "gif_file": "assets/animations/fig1a_scaled_risk.gif",
+  "sha256": "1fe6b79d8d845e7bb69433f4ad5e44843bc4c67eee1435f9b00dca34c705f6b5",
+  "original_bytes_preserved": true,
+  "frames": 101,
+  "size": [
+    1209,
+    756
+  ],
+  "duration_ms": 16080,
+  "loop": 0,
+  "source_solver_sha256": "b36661241307210386cf66c0aa783c8f878e9c976a22b073823d6b336f3c05d5",
+  "source_solver_identical_to_package_at_integration": true,
+  "delta_grid_confirmed": true,
+  "classical_constants_match_shared_solver": true,
+  "LS_closed_form_matches": true,
+  "robust_risks_finite_positive": true,
+  "no_delta_interpolation": true,
+  "risk_grid_shape": [
+    100,
+    3,
+    104
+  ],
+  "rendered_from_shared_solver_and_cached_data": true,
+  "rendered_gif_sha256": "1fe6b79d8d845e7bb69433f4ad5e44843bc4c67eee1435f9b00dca34c705f6b5",
+  "rendered_bytes_identical_to_original": true,
+  "scientific_invariant_unit_tests_passed": 2
+}

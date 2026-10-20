@@ -1,0 +1,65 @@
+{
+  "source_archive_sha256": "9186dbf80fdfe6b25b67a72f05d026015a3ab022d3ed023c0c925d2db2bc48f4",
+  "datasets": [
+    {
+      "file": "empirical/penalized_phase.csv",
+      "sha256": "0e85fd2d209d35d0516dc0a9f941f12858688a525487b937488a9c2f88c3a709"
+    },
+    {
+      "file": "empirical/penalized_phase.metadata.json",
+      "sha256": "6a659e860245c1f27c30980621ae2d379dfdfe8501ae91ab0a11aa86194741a4"
+    },
+    {
+      "file": "empirical/unpenalized_phase.csv",
+      "sha256": "05da904fd1bdc749f96b879cfcda18636592d46849b651a486a787f428a94603"
+    },
+    {
+      "file": "empirical/unpenalized_phase.metadata.json",
+      "sha256": "6ad80eeb2a47a3de1990e12f848ef2e93916b77060c05d4ce762769e9da36edc"
+    },
+    {
+      "file": "forced_nonzero_points.json",
+      "sha256": "d79602fb90cbada165438cc27b23349ffb958da1ca56407c6c341d96c5733ce8"
+    },
+    {
+      "file": "gaussian_parameters.csv",
+      "sha256": "d11f5a8147fe49f9ce919400a022caf528fac5a79afc278c25294211283ae4b4"
+    },
+    {
+      "file": "gaussian_scores.csv",
+      "sha256": "f7e3e7157d388ebfd45276b4c69d9d855be848568720b98627a758f5b78eab8d"
+    },
+    {
+      "file": "parent_recovery_manifest.json",
+      "sha256": "973adabe85ee57135dd489b79bc16ebdf82d7f98a9584ed6e788c90f5c944a83"
+    },
+    {
+      "file": "recomputation_manifest.json",
+      "sha256": "616f8eb70e2bcc0328086a55e17efe5c949a53ff352958c176b6d3e62b91e399"
+    },
+    {
+      "file": "theory/penalized_are.csv",
+      "sha256": "3de10d745b63b8ceefe26a26faef46000a119b53977eca2479c92f7cdcbd11a1"
+    },
+    {
+      "file": "theory/penalized_are.metadata.json",
+      "sha256": "412d7dd0803061cf7ed42112bc4ce648baa90cf14db18adad155e083d855152e"
+    },
+    {
+      "file": "theory/penalized_phase.csv",
+      "sha256": "39b6c9e2718618673e3aef7baccbfa6b2492793049f8d7ee92b1ec1d7815f3fd"
+    },
+    {
+      "file": "theory/penalized_phase.metadata.json",
+      "sha256": "a183ed94fdde48552831bbe9076e400a0f048d9ee0e80ff67808707209604ef7"
+    },
+    {
+      "file": "unpenalized_student_t.csv",
+      "sha256": "5ac319a295ed320bc68728d9e1f5783450a4bb46e706541910781c84e6becb02"
+    },
+    {
+      "file": "unpenalized_student_t.metadata.json",
+      "sha256": "dc1d8954a465598e0fa1647945b176f6d405533f3ec231f2332ec6a39171de50"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "experiment": "empirical_penalized",
+  "preset": "smoke",
+  "provenance": "Small simulation check with an explicitly chosen mean-MSE oracle tuning criterion.",
+  "settings": {
+    "penalties": [
+      "ridge",
+      "lasso"
+    ],
+    "beta_zero_prob": 0.8,
+    "beta_slab_var": 5.0,
+    "n": 40,
+    "n_rep": 2,
+    "base_seed": 20260610,
+    "lambda_min_pos": 0.0001,
+    "lambda_max": 1000.0,
+    "lambda_initial_span": 8.0,
+    "lambda_n_initial": 3,
+    "lambda_refine_span": 3.0,
+    "lambda_n_refine": 3,
+    "lambda_expand_rounds": 0,
+    "lambda_refine_rounds": 0,
+    "lambda_criterion": "mse_mean",
+    "min_lambda_success_rate": 1.0,
+    "df_values": [
+      8.0,
+      10.0
+    ],
+    "delta_values": [
+      2.0,
+      4.0
+    ]
+  }
+}

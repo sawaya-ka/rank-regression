@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rank-regression-reproducibility"
+version = "0.3.0"
+description = "Reproducible risk calculations and figures for high-dimensional rank regression"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Kazuma Sawaya"}]
+dependencies = [
+  "numpy>=2.0,<3", "scipy>=1.13,<2", "pandas>=2.2,<3",
+  "matplotlib>=3.8,<4", "scikit-learn>=1.4,<2", "threadpoolctl>=3.4,<4"
+]
+
+[project.optional-dependencies]
+notebook = ["jupyterlab>=4,<5"]
+animation = ["Pillow>=10,<13"]
+
+[project.scripts]
+rank-repro = "rank_repro.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

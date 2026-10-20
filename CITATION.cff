@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying manuscript, High-Dimensional Rank Regression: Exact Risk and Effective-Score Phase Transition, by K. Sawaya, Y. Uematsu, and M. Imaizumi. Publication metadata will be added when available."
+type: software
+title: "High-Dimensional Rank Regression: Reproducibility Code"
+version: 0.3.0
+authors:
+  - family-names: Sawaya
+    given-names: Kazuma

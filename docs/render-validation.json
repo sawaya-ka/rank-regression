@@ -1,0 +1,175 @@
+{
+  "figures_regenerated": 13,
+  "curves_same_shape": true,
+  "curves": {
+    "df": {
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "nonfinite_patterns_equal": true
+    },
+    "delta": {
+      "max_absolute_difference": 8.881784197001252e-16,
+      "max_relative_difference": 2.141311707622384e-16,
+      "nonfinite_patterns_equal": true
+    },
+    "alpha2_LS": {
+      "max_absolute_difference": 2.4868995751603507e-14,
+      "max_relative_difference": 1.4973107692622136e-15,
+      "nonfinite_patterns_equal": true
+    },
+    "alpha2_LAD": {
+      "max_absolute_difference": 6.9267116487026215e-09,
+      "max_relative_difference": 1.8354864849353762e-10,
+      "nonfinite_patterns_equal": true
+    },
+    "alpha2_rank": {
+      "max_absolute_difference": 1.2194504961371422e-08,
+      "max_relative_difference": 1.9286267945574438e-13,
+      "nonfinite_patterns_equal": true
+    },
+    "rank_cutoff": {
+      "max_absolute_difference": 3.7971403799019754e-11,
+      "max_relative_difference": 9.762326620480218e-14,
+      "nonfinite_patterns_equal": true
+    },
+    "quadrature_order": {
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "nonfinite_patterns_equal": true
+    }
+  },
+  "png_comparison": {
+    "fig01_student_efficiency.png": {
+      "pixel_identical": true,
+      "original_size": [
+        1586,
+        1479
+      ],
+      "new_size": [
+        1586,
+        1479
+      ]
+    },
+    "fig02_gaussian_efficiency.png": {
+      "pixel_identical": true,
+      "original_size": [
+        1433,
+        1081
+      ],
+      "new_size": [
+        1433,
+        1081
+      ]
+    },
+    "fig03_student_rank_vs_ls.png": {
+      "pixel_identical": true,
+      "original_size": [
+        1433,
+        1081
+      ],
+      "new_size": [
+        1433,
+        1081
+      ]
+    },
+    "fig04_isotonic_projection.png": {
+      "pixel_identical": true,
+      "original_size": [
+        2256,
+        1417
+      ],
+      "new_size": [
+        2256,
+        1417
+      ]
+    },
+    "fig05_effective_scores.png": {
+      "pixel_identical": true,
+      "original_size": [
+        3565,
+        1824
+      ],
+      "new_size": [
+        3565,
+        1824
+      ]
+    },
+    "fig06_proximal_atom.png": {
+      "pixel_identical": true,
+      "original_size": [
+        1609,
+        1081
+      ],
+      "new_size": [
+        1609,
+        1081
+      ]
+    },
+    "figS01_student_lad_vs_ls.png": {
+      "pixel_identical": true,
+      "original_size": [
+        1433,
+        1081
+      ],
+      "new_size": [
+        1433,
+        1081
+      ]
+    },
+    "figS02_student_rank_over_lad.png": {
+      "pixel_identical": true,
+      "original_size": [
+        1433,
+        1081
+      ],
+      "new_size": [
+        1433,
+        1081
+      ]
+    },
+    "figure_07_penalized_phase.png": {
+      "pixel_identical": true,
+      "original_size": [
+        2180,
+        920
+      ],
+      "new_size": [
+        2180,
+        920
+      ]
+    },
+    "figure_08_penalized_are.png": {
+      "pixel_identical": false,
+      "original_size": [
+        2180,
+        1460
+      ],
+      "new_size": [
+        2180,
+        1460
+      ]
+    },
+    "figure_09_empirical_unpenalized.png": {
+      "pixel_identical": true,
+      "original_size": [
+        1280,
+        974
+      ],
+      "new_size": [
+        1280,
+        974
+      ]
+    },
+    "figure_10_empirical_penalized.png": {
+      "pixel_identical": true,
+      "original_size": [
+        2180,
+        920
+      ],
+      "new_size": [
+        2180,
+        920
+      ]
+    }
+  }
+}

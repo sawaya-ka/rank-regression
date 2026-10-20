@@ -1,0 +1,41 @@
+[
+  {
+    "i_df": 0,
+    "df": 1.0,
+    "delta": 1.001,
+    "seed": 2762461252,
+    "old_mse_rank": 101462.64108936388,
+    "new_mse_rank": 101001.40046674066,
+    "old_objective_scale_archived": 0.0019621217178964,
+    "new_objective_scale_pairwise": 3.4238162570631165e-13,
+    "new_success": true,
+    "method": "centered_qr_zero_rank_loss",
+    "elapsed": 0.16265726100027678
+  },
+  {
+    "i_df": 25,
+    "df": 7.359044528456264,
+    "delta": 1.001,
+    "seed": 97191317,
+    "old_mse_rank": 9403.564052666628,
+    "new_mse_rank": 35783.29855880489,
+    "old_objective_scale_archived": 0.0182601506250707,
+    "new_objective_scale_pairwise": 1.9761519397842077e-13,
+    "new_success": true,
+    "method": "centered_qr_zero_rank_loss",
+    "elapsed": 0.15504923000116833
+  },
+  {
+    "i_df": 49,
+    "df": 50.0,
+    "delta": 1.001,
+    "seed": 955418827,
+    "old_mse_rank": 442.9713398514445,
+    "new_mse_rank": 826.1061074802346,
+    "old_objective_scale_archived": 0.0262163277331988,
+    "new_objective_scale_pairwise": 3.0440503209044175e-14,
+    "new_success": true,
+    "method": "centered_qr_zero_rank_loss",
+    "elapsed": 0.15463912700215587
+  }
+]

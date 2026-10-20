@@ -1,0 +1,28 @@
+{
+  "datasets": [
+    {
+      "file": "unpenalized_student_t.csv",
+      "source": "RANK/tmp_student_t_phase.csv",
+      "sha256": "1ea68eebb8d3dc1b262cc3e09d7f6f105915bbf0a747213e8b0e44092bb23a0f",
+      "bytes": 1545037,
+      "status": "complete_archival_cache",
+      "description": "Original 100 by 100 quadrature cache; low-df, delta close to 1 requires accuracy checks."
+    },
+    {
+      "file": "gaussian_scores.csv",
+      "source": "RANK/data/gaussian_effective_score_curves.csv",
+      "sha256": "f7e3e7157d388ebfd45276b4c69d9d855be848568720b98627a758f5b78eab8d",
+      "bytes": 2651166,
+      "status": "complete_archival_cache",
+      "description": "Original Gaussian score samples; numerical scores can also be recomputed."
+    },
+    {
+      "file": "gaussian_parameters.csv",
+      "source": "RANK/data/gaussian_effective_score_parameters.csv",
+      "sha256": "d11f5a8147fe49f9ce919400a022caf528fac5a79afc278c25294211283ae4b4",
+      "bytes": 4167,
+      "status": "complete_archival_cache",
+      "description": "Original Gaussian parameters with state-equation residuals."
+    }
+  ]
+}

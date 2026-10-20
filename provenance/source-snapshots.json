@@ -1,0 +1,17 @@
+{
+  "original_numerical_source": {
+    "file": "original-run-source.tar.gz",
+    "sha256": "2d48fe61f7e80dec00693b397b1e69dd2bb35b4fbcd319ee87137e16a13b86fc",
+    "fingerprint": "17d6759bacbcbeb3c821745b21e102216e67dc3ac023fc618d22190d75ffe39a",
+    "contents": "Original src/, configs/, data/, tools/run_recompute_plan.py, pyproject.toml, requirements-tested.txt. Enough to reproduce the original numerical fingerprint; excludes deployment files.",
+    "packaging_note": "A short README was added for installation; the numerical fingerprint does not depend on it."
+  },
+  "repair_source": {
+    "location": "raw release asset source/",
+    "hash_manifest": "repair_manifest.json"
+  },
+  "publication_source": {
+    "version": "0.3.0",
+    "note": "Fresh-run recovery and plotting defaults changed; a new run has a new fingerprint. Archived checkpoint identities were not changed."
+  }
+}
