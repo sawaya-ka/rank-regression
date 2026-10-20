@@ -260,7 +260,7 @@ def _figure8(frame: pd.DataFrame, meta: dict):
             axes[1, j].plot(x, part["lambda_ls_opt"], color=plt.colormaps["Reds"](shade), ls="--", lw=1.3)
         axes[0, j].axhline(1, color=".4", ls=":", lw=1)
         axes[0, j].set(title=penalty.title() + " penalty",
-                       ylabel=r"$\frac{\min_{\lambda}\alpha_{\rm LS}^{2}(\lambda)}{\min_{\lambda}\alpha_{\rm Rank}^{2}(\lambda)}$")
+                       ylabel=r"$\frac{\min_{\lambda}\alpha_{\rm LS}^{2}(\lambda)}{\min_{\lambda}\alpha_*^{2}(\lambda)}$")
         axes[1, j].set(xlabel=r"$\delta$", ylabel=r"selected $\lambda$")
         for ax in axes[:, j]:
             ax.set_xscale("log")
