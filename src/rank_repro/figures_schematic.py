@@ -1,4 +1,4 @@
-"""Explicit Gaussian realization of the schematic in Supplementary Figure S3.
+"""Explicit Gaussian realization of the schematic in Supplementary Figure S5.
 
 The construction uses V ~ N(0,1) and tau=0.9, as in the active example
 in Figure 4, to illustrate the cutoff equation and isotonic projection.
@@ -38,7 +38,7 @@ def generate_schematic(output_dir: Path) -> list[Path]:
         output_dir.mkdir(parents=True, exist_ok=True)
         paths = []
         for suffix in ("pdf", "png"):
-            path = output_dir / f"figS03_isotonic_schematic.{suffix}"
+            path = output_dir / f"figS05_isotonic_schematic.{suffix}"
             fig.savefig(path, dpi=180, bbox_inches="tight")
             paths.append(path)
         plt.close(fig)

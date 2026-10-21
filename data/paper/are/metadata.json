@@ -1,0 +1,54 @@
+{
+  "figure_numbers": {
+    "cauchy": "S3",
+    "laplace": "S4"
+  },
+  "noise_scale": 1,
+  "penalty": "none",
+  "delta_min": 1.000001,
+  "delta_max": 1000,
+  "delta_min_by_noise": {
+    "cauchy": 1.0001,
+    "laplace": 1.000001
+  },
+  "x_limits": [
+    0.85,
+    1000
+  ],
+  "open_endpoint": {
+    "delta": 1,
+    "ARE": 1,
+    "interpretation": "right-hand limit, not a finite-risk data point; not connected to computed curves"
+  },
+  "ARE_definition": "ARE(A:B)=risk(B)/risk(A); above one favors A",
+  "critical_delta": {
+    "cauchy": 1.4857992137878224,
+    "laplace": 1.4290285569735894
+  },
+  "risk_crossings": {
+    "cauchy": {
+      "Rank_LAD": 1.6801829847392866
+    },
+    "laplace": {
+      "Rank_LS": 1.6112298568200443,
+      "LAD_LS": 3.389502519025748,
+      "Rank_LAD": 17.13139946991599
+    }
+  },
+  "classical_scaled_risks": {
+    "cauchy": {
+      "Rank": 3.289868133696453,
+      "LAD": 2.4674011002723395,
+      "LS": "infinite"
+    },
+    "laplace": {
+      "Rank": 1.3333333333333333,
+      "LAD": 1,
+      "LS": 2
+    }
+  },
+  "max_relative_equation_residual": {
+    "cauchy": 9.916290011346973e-12,
+    "laplace": 1.1054934745402534e-11
+  }
+}

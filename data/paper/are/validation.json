@@ -1,0 +1,97 @@
+{
+  "comparison": "Nested scalar roots versus independent two-variable least_squares and adaptive quadrature",
+  "max_relative_risk_discrepancy": 2.3812274374535036e-10,
+  "points": [
+    {
+      "noise": "cauchy",
+      "delta": 1.01,
+      "rank_relative_discrepancy": 1.102384850071303e-11,
+      "lad_relative_discrepancy": 2.3812274374535036e-10
+    },
+    {
+      "noise": "cauchy",
+      "delta": 1.1,
+      "rank_relative_discrepancy": 3.1663560662309465e-13,
+      "lad_relative_discrepancy": 7.29072358041094e-11
+    },
+    {
+      "noise": "cauchy",
+      "delta": 1.5,
+      "rank_relative_discrepancy": 8.065548229296837e-12,
+      "lad_relative_discrepancy": 1.3137713139599327e-11
+    },
+    {
+      "noise": "cauchy",
+      "delta": 2,
+      "rank_relative_discrepancy": 1.0658141036401503e-13,
+      "lad_relative_discrepancy": 1.3100631690576847e-14
+    },
+    {
+      "noise": "cauchy",
+      "delta": 10,
+      "rank_relative_discrepancy": 5.297984273511247e-13,
+      "lad_relative_discrepancy": 2.1419532814093145e-12
+    },
+    {
+      "noise": "cauchy",
+      "delta": 100,
+      "rank_relative_discrepancy": 1.0680345496894006e-12,
+      "lad_relative_discrepancy": 2.347411154346446e-11
+    },
+    {
+      "noise": "laplace",
+      "delta": 1.01,
+      "rank_relative_discrepancy": 1.0913714376670214e-11,
+      "lad_relative_discrepancy": 1.0605050171363928e-10
+    },
+    {
+      "noise": "laplace",
+      "delta": 1.1,
+      "rank_relative_discrepancy": 4.370726003344316e-12,
+      "lad_relative_discrepancy": 4.4299675039383146e-11
+    },
+    {
+      "noise": "laplace",
+      "delta": 1.5,
+      "rank_relative_discrepancy": 1.3636869411470798e-12,
+      "lad_relative_discrepancy": 1.6532331059693206e-12
+    },
+    {
+      "noise": "laplace",
+      "delta": 2,
+      "rank_relative_discrepancy": 2.204902926905561e-13,
+      "lad_relative_discrepancy": 2.254640918408768e-12
+    },
+    {
+      "noise": "laplace",
+      "delta": 10,
+      "rank_relative_discrepancy": 1.3697931677825181e-12,
+      "lad_relative_discrepancy": 5.24469356832924e-13
+    },
+    {
+      "noise": "laplace",
+      "delta": 100,
+      "rank_relative_discrepancy": 3.0258018313134016e-12,
+      "lad_relative_discrepancy": 5.759170917940537e-12
+    }
+  ],
+  "near_one_checks": [
+    {
+      "noise": "cauchy",
+      "delta": 1.0001,
+      "independent_rank_risk": 3031397019.1051893,
+      "independent_lad_risk": 3031398329.985882,
+      "rank_relative_discrepancy": 3.567464101905671e-10,
+      "lad_relative_discrepancy": 1.5730416969006455e-10
+    },
+    {
+      "noise": "laplace",
+      "delta": 1.000001,
+      "independent_rank_risk": 2150632.875843886,
+      "independent_lad_risk": 2150633.8982386515,
+      "rank_relative_discrepancy": 2.749015015623968e-09,
+      "lad_relative_discrepancy": 1.58736357391831e-09
+    }
+  ],
+  "near_one_max_relative_risk_discrepancy": 2.749015015623968e-09
+}

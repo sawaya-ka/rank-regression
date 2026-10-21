@@ -22,9 +22,11 @@ Each figure is written as a PDF and PNG. Data paths below are relative to `data/
 | 10 | `figure_10_empirical_penalized` | `empirical/penalized_phase.csv`; Figure 7 theory grid for boundaries | `figures_heavy` |
 | S1 | `figS01_student_lad_vs_ls` | Same Student-t risk curves as Figure 3, df 3–10 | `figures_light` |
 | S2 | `figS02_student_rank_over_lad` | Same Student-t risk curves, df 1–10 | `figures_light` |
-| S3 | `figS03_isotonic_schematic` | Gaussian illustration with τ = 0.9 | `figures_schematic` |
+| S3 | `figS03_cauchy_are` | `are/risk_cauchy.csv`; Cauchy(0,1) errors | `figures_are` |
+| S4 | `figS04_laplace_are` | `are/risk_laplace.csv`; Laplace(0,1) errors | `figures_are` |
+| S5 | `figS05_isotonic_schematic` | Gaussian illustration with τ = 0.9 | `figures_schematic` |
 
-To regenerate selected heavy figures, use `--group heavy --figures 8 9 10`. The default input directory is `data/paper/`; use `--data-dir PATH` for another complete compatible data set.
+To regenerate Figures S3–S4, use `--group are`. To regenerate selected heavy figures, use `--group heavy --figures 8 9 10`. The default input directory is `data/paper/`; use `--data-dir PATH` for another complete compatible data set.
 
 ## Risk and score curves
 
@@ -32,9 +34,11 @@ Figure 1 uses a 100 × 100 grid of Student-t degrees of freedom and δ. The top 
 
 Figures 2 and 3 plot LS risk divided by the comparison method's risk, so values above one favor that method. Figure 2 includes both Rank and LAD. Figure S1 plots LS risk / LAD risk. Figure S2 instead plots Rank risk / LAD risk, so values above one favor LAD.
 
+Figure S3 plots LAD risk / Rank risk under Cauchy errors. Figure S4 plots LS risk / Rank risk, LS risk / LAD risk, and LAD risk / Rank risk under Laplace errors. Values above one favor the estimator in the denominator.
+
 Figure 4 illustrates the proximal construction with c = 1/√2 and Gaussian noise variance 1/2, giving a standard Gaussian effective residual. Its τ values are illustrative. Figures 5 and 6 use self-consistent parameters instead. In Figure 6, the zero-atom mass is 1/δ for LAD and zero for LS.
 
-The renderer exports `gaussian_diagnostics.json` and `student_risk_curves.csv` alongside the figures. Figure S3 uses an explicit Gaussian example of the same isotonic construction.
+The renderer exports `gaussian_diagnostics.json` and `student_risk_curves.csv` alongside the figures. Figure S5 uses an explicit Gaussian example of the same isotonic construction.
 
 ## Penalized theory and finite-sample comparisons
 

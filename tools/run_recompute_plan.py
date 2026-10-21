@@ -48,6 +48,8 @@ def fingerprint(plan):
     paths = [Path(__file__), *sorted((ROOT / "src/rank_repro").glob("*.py")),
              *sorted((ROOT / plan["data_root"]).rglob("*.csv")),
              *sorted((ROOT / plan["data_root"]).rglob("*.json")),
+             *sorted((ROOT / "data/paper/are").glob("*.csv")),
+             *sorted((ROOT / "data/paper/are").glob("*.json")),
              ROOT / plan["unpenalized_theory_source"]]
     hashes = {str(p.relative_to(ROOT)): file_sha(p) for p in paths}
     return hashlib.sha256(json.dumps({"plan": plan, "files": hashes}, sort_keys=True).encode()).hexdigest()
@@ -150,6 +152,7 @@ def write_outputs(plan, output, jobs, fingerprint_value):
     import pandas as pd
     data_root = output / "data"
     shutil.copytree(ROOT / plan["data_root"], data_root, dirs_exist_ok=True)
+    shutil.copytree(ROOT / "data/paper/are", data_root / "are", dirs_exist_ok=True)
     parent_manifest = data_root / "recovery_manifest.json"
     if parent_manifest.exists():
         parent_manifest.replace(data_root / "parent_recovery_manifest.json")
@@ -307,9 +310,13 @@ def run(plan_path, output, workers=1, dry_run=False):
         matplotlib.use("Agg")
         from rank_repro.figures_light import generate_light_figures
         from rank_repro.figures_heavy import generate_heavy_figures
+        from rank_repro.figures_are import generate_are_figures
+        from rank_repro.figures_schematic import generate_schematic
         try:
             generate_light_figures(output / "data", output / "figures")
             generate_heavy_figures(output / "data", output / "figures")
+            generate_are_figures(output / "data", output / "figures")
+            generate_schematic(output / "figures")
             state["figures_complete"] = True
         except Exception as exc:
             state.update(complete=False, status="figure_generation_failed", figures_complete=False,

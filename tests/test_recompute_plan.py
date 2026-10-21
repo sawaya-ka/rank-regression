@@ -86,6 +86,8 @@ class RecomputeMergeTests(unittest.TestCase):
         self.write_table(recovered / "theory/penalized_phase.csv", theoretical_rows, penalized=True, theoretical=True)
         for name in ("gaussian_scores.csv", "gaussian_parameters.csv"):
             (self.data / name).write_text("delta,value\n2,1\n")
+        (self.data / "paper/are").mkdir(parents=True)
+        (self.data / "paper/are/metadata.json").write_text('{"figure_numbers": {"cauchy": "S3", "laplace": "S4"}}\n')
 
     def tearDown(self):
         self.temporary.cleanup()

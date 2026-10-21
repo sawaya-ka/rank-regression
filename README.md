@@ -37,6 +37,12 @@ To regenerate only Figures 8–10:
 rank-repro figures --group heavy --figures 8 9 10 --output-dir build/figures
 ```
 
+To regenerate Figures S3–S4:
+
+```bash
+rank-repro figures --group are --output-dir build/figures
+```
+
 ## Numerical conventions
 
 - The asymptotic aspect ratio is defined by n/p → δ. Student-t errors have scale one, without variance standardization. Unpenalized LS risk is infinite for degrees of freedom at most two.

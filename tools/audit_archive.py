@@ -132,7 +132,7 @@ report['warnings'] = [
     'LS/LAD diagnostics outside the 760 points identified in forced_nonzero_points.json are limited to the input-table solver flags.',
     'Figure 10 tunes lambda using median MSE, then displays mean MSE at that selection on the same repetitions (oracle Monte Carlo comparison, not cross-validation).',
     'The archive includes selected Rank repetitions at every point and selected LS/LAD repetitions at the 760 points identified in forced_nonzero_points.json; LS/LAD repetition-level records at the other points are not included.',
-    'Archive contains Figures 1–10 and S1–S2. Figure S3 is generated separately by the schematic renderer.'
+    'Archive contains Figures 1–10 and S1–S2. Figures S3–S5 are generated separately by the ARE and schematic renderers.'
 ]
 expected_counts = {'quadrature':865, 'theory_lasso':10000, 'unpenalized_rank':2500, 'penalized_repair':5000}
 if dict(counts) != expected_counts: errors.append('Unexpected production job counts')

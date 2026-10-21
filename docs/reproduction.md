@@ -9,9 +9,15 @@ rank-repro audit --strict
 rank-repro figures --group all --output-dir build/figures
 ```
 
-The default data directory is `data/paper/`. Figures 1 and 7–10 use these tables; the remaining curves use deterministic scalar calculations. The animation renderer uses its separate stored risk grid. This workflow does not run finite-sample simulations.
+The default data directory is `data/paper/`. Figures 1, 7–10, and S3–S4 use these tables; the remaining curves use deterministic scalar calculations. The animation renderer uses its separate stored risk grid. This workflow does not run finite-sample simulations.
 
 Pass `--data-dir PATH` to draw a complete compatible set of newly computed tables. The renderer checks grid completeness and the noise/signal assumptions before overlaying theoretical boundaries on empirical results. See the [figure map](figure-map.md) for inputs and definitions.
+
+To draw only Figures S3–S4 from the supplied Cauchy and Laplace risk tables:
+
+```bash
+rank-repro figures --group are --output-dir build/figures
+```
 
 ## Compute numerical results
 
@@ -23,6 +29,12 @@ python3 tools/run_recompute_plan.py --workers 8 --output-dir results
 The plan in `configs/recompute-plan.json` computes 865 selected Student-t quadrature points, 10,000 lasso theory points, 2,500 unpenalized Rank points, and 5,000 penalized empirical points. Ridge theory, the Figure 8 optimum table, and selected LS/LAD empirical summaries are supplied as inputs in `data/` and `data/recovered/`.
 
 The output directory contains checkpoints, assembled tables, diagnostics, and figures. Running the same command again reuses successful checkpoints and retries failed ones. A source/configuration fingerprint prevents reuse after incompatible changes; use a new output directory when changing the implementation, settings, or input data.
+
+To recompute the scalar risk curves and draw Figures S3–S4:
+
+```bash
+python3 -m rank_repro.figures_are --output-dir build/are
+```
 
 For other designs or grids, use the standalone commands with explicit configurations:
 

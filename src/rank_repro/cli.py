@@ -35,9 +35,17 @@ def audit(data_dir: Path, strict: bool = False) -> int:
         print("Figures 1–6, S1–S2: phase grid validation passed")
     except (OSError, ValueError) as exc:
         print(f"Light phase grid unavailable: {exc}")
-    print("Figure S3: Gaussian illustration of the isotonic construction.")
+    from .figures_are import load_are_data
+    are = False
+    try:
+        load_are_data(data_dir / "are")
+        are = True
+        print("Figures S3–S4: Cauchy and Laplace risk tables validated")
+    except (OSError, ValueError) as exc:
+        print(f"Figures S3–S4: UNAVAILABLE — {exc}")
+    print("Figure S5: Gaussian illustration of the isotonic construction.")
     from .figures_heavy import _load, _risk_columns, _check_empirical
-    full = light
+    full = light and are
     for number, (relative, _) in FILES.items():
         try:
             frame, meta = _load(data_dir / relative, penalized=number != "9")
@@ -56,7 +64,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="rank-repro", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     plots = sub.add_parser("figures", help="Draw figures from available complete inputs")
-    plots.add_argument("--group", choices=("light", "heavy", "all"), default="light")
+    plots.add_argument("--group", choices=("light", "heavy", "are", "all"), default="light")
     plots.add_argument("--data-dir", type=Path, default=Path("data/paper"))
     plots.add_argument("--output-dir", type=Path, default=Path("figures"))
     plots.add_argument("--figures", nargs="+", choices=("7", "8", "9", "10"), help="Select heavy figures; use --group heavy")
@@ -94,7 +102,10 @@ def main(argv: list[str] | None = None) -> int:
             print("Figure 1 reads the selected data directory; numerical-check scope is recorded in its metadata.")
             paths.extend(generate_light_figures(args.data_dir, args.output_dir))
             paths.extend(generate_schematic(args.output_dir))
-            print("Figure S3 illustrates the isotonic construction for Gaussian noise.")
+            print("Figure S5 illustrates the isotonic construction for Gaussian noise.")
+        if args.group in {"light", "are", "all"}:
+            from .figures_are import generate_are_figures
+            paths.extend(generate_are_figures(args.data_dir, args.output_dir))
         if args.group in {"heavy", "all"}:
             from .figures_heavy import generate_heavy_figures
             paths.extend(generate_heavy_figures(args.data_dir, args.output_dir, args.figures))
