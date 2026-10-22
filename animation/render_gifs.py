@@ -7,8 +7,10 @@ Interpolation in log degrees of freedom is only for drawing smooth curves.
 """
 from pathlib import Path
 import argparse
+import io
 import json
 import math
+import os
 
 import numpy as np
 import matplotlib
@@ -25,6 +27,18 @@ ROOT = Path(__file__).resolve().parent
 COLORS = ('#C43C39', '#3767AF', '#2D7F50')
 LABELS = ('least squares', 'least absolute deviations', 'rank regression')
 STYLES = ('--', '-.', '-')
+
+
+def save_image(image, path, **kwargs):
+    """Finish encoding before replacing the output file."""
+    buffer = io.BytesIO()
+    image.save(buffer, format=path.suffix[1:].upper(), **kwargs)
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    with temporary.open('wb') as stream:
+        stream.write(buffer.getvalue())
+        stream.flush()
+        os.fsync(stream.fileno())
+    temporary.replace(path)
 
 
 def delta_label(value):
@@ -69,6 +83,18 @@ def draw_background(ax, x, risk):
         ax.axvspan(lo, hi, color=COLORS[winner[start]], alpha=.35, lw=0, zorder=0)
 
 
+def ls_plot_curve(delta, mode, ymax):
+    """Sample the exact LS curve beyond the top of the visible risk range."""
+    factor = 1. if np.isinf(delta) else 1. / (delta - 1.)
+    if mode == 'scaled' and np.isfinite(delta):
+        factor *= delta
+    # R(nu) = factor * nu / (nu - 2). Sampling risk rather than nu avoids
+    # truncation when the common df grid does not approach 2 closely enough.
+    risk = np.geomspace(1.15 * ymax, factor * 50. / 48., 600)
+    df = 2. + 2. * factor / (risk - factor)
+    return df, risk, factor
+
+
 def render_frame(df, delta, risk, mode):
     x, y = dense_risks(df, delta, risk, mode)
     is_zero = mode == 'raw' and np.isinf(delta)
@@ -88,9 +114,6 @@ def render_frame(df, delta, risk, mode):
         fig.text(.97, .865, rf'$\delta={delta_label(delta)}$', ha='right', fontsize=20)
         if not is_zero:
             draw_background(ax, x, y)
-        for k in range(3):
-            ax.plot(x, np.where(np.isfinite(y[k]), y[k], np.nan), color=COLORS[k],
-                    ls=STYLES[k], lw=2.6, zorder=3+k, label=LABELS[k])
         ax.set_xscale('log')
         ax.set_xlim(1, 50)
         ax.xaxis.set_major_locator(FixedLocator([1, 2, 5, 10, 20, 50]))
@@ -117,6 +140,22 @@ def render_frame(df, delta, risk, mode):
             ax.yaxis.set_minor_locator(NullLocator())
             ax.set_ylabel(r'Scaled risk $\delta\,\alpha^2(\delta)$' if mode == 'scaled'
                           else r'Risk $\alpha^2(\delta)$')
+        for k in range(3):
+            if k == 0 and not is_zero:
+                plot_x, plot_y, ls_factor = ls_plot_curve(delta, mode, ymax)
+            else:
+                plot_x, plot_y = x, np.where(np.isfinite(y[k]), y[k], np.nan)
+            ax.plot(plot_x, plot_y, color=COLORS[k], ls=STYLES[k],
+                    lw=2.6, zorder=3+k, label=LABELS[k])
+        if not is_zero:
+            # Follow the same analytic curve with a small continuation arrow.
+            arrow_y = ymax * (ymax / ymin) ** np.array([-.045, .008])
+            arrow_x = 2. + 2. * ls_factor / (arrow_y - ls_factor)
+            ax.annotate('', xy=(arrow_x[1], arrow_y[1]),
+                        xytext=(arrow_x[0], arrow_y[0]), annotation_clip=False,
+                        arrowprops=dict(arrowstyle='-|>', color=COLORS[0],
+                                        lw=1.8, mutation_scale=12,
+                                        shrinkA=0, shrinkB=0), zorder=6)
         ax.set_axisbelow(True)
         ax.grid(which='major', color='#FFFFFF', alpha=.58, lw=.8)
         ax.tick_params(axis='both', labelsize=11, length=4)
@@ -177,7 +216,7 @@ def main():
         for i, (delta, risk) in enumerate(series):
             pic = render_frame(dfs, delta, risk, mode)
             if i in indices:
-                pic.save(args.output_dir/f'preview_{mode}_{i:03d}.png')
+                save_image(pic, args.output_dir/f'preview_{mode}_{i:03d}.png')
                 snapshots.append(pic.copy())
             # Stable palette throughout the animation, including all three region colors.
             if palette is None:
@@ -189,21 +228,22 @@ def main():
         durations = [1800] + [args.frame_ms]*len(deltas)
         durations[-1] = 2400
         path = args.output_dir/filename
-        frames[0].save(path, save_all=True, append_images=frames[1:], duration=durations,
-                       loop=0, disposal=2, optimize=False)
+        save_image(frames[0], path, save_all=True, append_images=frames[1:],
+                   duration=durations, loop=0, disposal=1, optimize=True)
         with Image.open(path) as check:
             assert check.n_frames == len(series)
             assert check.info.get('loop') == 0
             total_ms = 0
             for j in range(check.n_frames):
                 check.seek(j)
+                check.load()
                 total_ms += check.info['duration']
         written.append({'file':filename,'frames':len(series),'duration_ms':total_ms,
                         'width':frames[0].width,'height':frames[0].height,'bytes':path.stat().st_size})
         contact = Image.new('RGB', (snapshots[0].width*2, snapshots[0].height*2), 'white')
         for i, pic in enumerate(snapshots):
             contact.paste(pic, ((i%2)*pic.width, (i//2)*pic.height))
-        contact.save(args.output_dir/f'contact_{mode}.png')
+        save_image(contact, args.output_dir/f'contact_{mode}.png')
     (args.output_dir/'render_metadata.json').write_text(json.dumps(written, indent=2)+'\n')
     print(json.dumps(written,indent=2), flush=True)
 
